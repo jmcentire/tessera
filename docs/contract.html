@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tessera Contract Demo</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-muted: #8b949e; --accent: #58a6ff;
+    --accent-dim: #1f6feb; --green: #3fb950; --red: #f85149;
+    --orange: #d29922; --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  #app { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  header { text-align: center; padding: 20px 0 12px; }
+  header h1 { font-size: 26px; color: #f0f6fc; letter-spacing: 0.5px; }
+  header .subtitle { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+  header .subtitle a { color: var(--accent); text-decoration: none; }
+
+  #phase-bar { display: flex; justify-content: center; gap: 24px; padding: 10px 0; flex-wrap: wrap; }
+  .phase-label { padding: 5px 16px; border-radius: 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; }
+  .phase-label.active-setup { background: var(--accent-dim); color: #fff; }
+  .phase-label.active-draft { background: var(--orange); color: #0d1117; }
+  .phase-label.active-negotiate { background: var(--purple); color: #0d1117; }
+  .phase-label.active-accept { background: var(--green); color: #0d1117; }
+  .phase-label.active-verify { background: var(--accent); color: #0d1117; }
+  .phase-label.active-tamper { background: var(--red); color: #fff; }
+  .phase-label.inactive { color: #484f58; background: transparent; }
+
+  #step-bar { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 6px 0 14px; }
+  #step-name { font-size: 14px; color: var(--text-muted); }
+  #step-dots { display: flex; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #21262d; transition: background 0.2s; }
+  .dot.active { background: var(--accent); }
+  .dot.done { background: var(--green); }
+
+  /* Status pipeline */
+  #status-bar { display: flex; justify-content: center; gap: 0; padding: 0 0 14px; }
+  .status-node { padding: 4px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; border: 1px solid var(--border); color: #484f58; }
+  .status-node:first-child { border-radius: 16px 0 0 16px; }
+  .status-node:last-child { border-radius: 0 16px 16px 0; }
+  .status-node.active-draft { background: var(--orange); color: #0d1117; border-color: var(--orange); }
+  .status-node.active-proposed { background: var(--purple); color: #0d1117; border-color: var(--purple); }
+  .status-node.active-accepted { background: var(--green); color: #0d1117; border-color: var(--green); }
+
+  #panels { display: grid; grid-template-columns: 1fr 200px 1fr; gap: 12px; min-height: 420px; }
+  #panels.hidden { display: none; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-y: auto; max-height: 520px; }
+  .panel-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
+  #vendor-panel { border-color: var(--orange); }
+  #vendor-panel .panel-title { color: var(--orange); }
+  #chain-panel { border-color: var(--purple); }
+  #chain-panel .panel-title { color: var(--purple); }
+  #client-panel { border-color: var(--accent); }
+  #client-panel .panel-title { color: var(--accent); }
+
+  #full-view { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; max-height: 520px; overflow-y: auto; }
+  #full-view.active { display: block; }
+
+  #narration { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 14px 0; min-height: 50px; }
+  #narration-text { font-size: 14px; line-height: 1.6; }
+  #narration-text strong { color: #f0f6fc; }
+
+  #nav { display: flex; justify-content: space-between; padding: 4px 0; }
+  #nav button { background: #21262d; color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; transition: background 0.15s; }
+  #nav button:hover:not(:disabled) { background: #30363d; }
+  #nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+  #nav button.primary { background: #238636; border-color: #2ea043; color: #fff; }
+  #nav button.primary:hover:not(:disabled) { background: #2ea043; }
+
+  .mono { font-family: 'SF Mono','Fira Code',monospace; }
+  .hash { font-family: 'SF Mono','Fira Code',monospace; font-size: 12px; color: var(--purple); word-break: break-all; }
+  .section { margin-bottom: 10px; }
+  .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .value { font-family: 'SF Mono','Fira Code',monospace; font-size: 13px; color: #f0f6fc; }
+  .callout { background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+  .callout.good { border-color: #238636; color: var(--green); }
+  .callout.bad { border-color: var(--red); color: var(--red); }
+  .callout.warn { border-color: var(--orange); color: var(--orange); }
+  .info-box h3 { font-size: 16px; color: #f0f6fc; margin-bottom: 6px; }
+  .info-box p { font-size: 13px; line-height: 1.5; margin-bottom: 4px; }
+
+  /* Clause cards */
+  .clause { background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
+  .clause-id { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 2px; }
+  .clause-text { font-size: 12px; color: var(--text); line-height: 1.4; }
+  .clause-old { text-decoration: line-through; color: var(--red); font-size: 11px; margin-bottom: 2px; }
+  .clause-new { color: var(--green); }
+
+  /* Chain entries */
+  .chain-entry { background: #0d1117; border: 1px solid var(--border); border-radius: 4px; padding: 6px 8px; margin-bottom: 6px; font-size: 11px; }
+  .chain-entry .ce-action { font-weight: 600; color: #f0f6fc; }
+  .chain-entry .ce-hash { font-family: 'SF Mono',monospace; font-size: 10px; color: var(--purple); }
+  .ce-actor { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+  .actor-vendor { background: var(--orange); color: #0d1117; }
+  .actor-client { background: var(--accent); color: #0d1117; }
+
+  .verify-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .verify-row .icon { font-size: 16px; width: 20px; text-align: center; }
+  .verify-ok .icon { color: var(--green); }
+  .verify-fail .icon { color: var(--red); }
+
+  .guard-box { background: #0d1117; border: 1px solid var(--red); border-radius: 6px; padding: 10px; margin-top: 8px; }
+  .guard-box .guard-label { font-size: 10px; color: var(--red); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .guard-box .guard-expr { font-family: 'SF Mono',monospace; font-size: 12px; color: var(--red); }
+  .guard-box .guard-reason { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  @media (max-width: 768px) {
+    #panels { grid-template-columns: 1fr; }
+    #chain-panel { order: 3; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Tessera Contract</h1>
+    <p class="subtitle">Interactive negotiation demo &mdash; <a href="index.html">back to Tessera</a></p>
+  </header>
+  <div id="phase-bar">
+    <span id="ph-setup" class="phase-label inactive">Setup</span>
+    <span id="ph-draft" class="phase-label inactive">Draft</span>
+    <span id="ph-negotiate" class="phase-label inactive">Negotiate</span>
+    <span id="ph-accept" class="phase-label inactive">Accept</span>
+    <span id="ph-verify" class="phase-label inactive">Verify</span>
+    <span id="ph-tamper" class="phase-label inactive">Tamper</span>
+  </div>
+  <div id="step-bar">
+    <span id="step-name"></span>
+    <div id="step-dots"></div>
+  </div>
+  <div id="status-bar">
+    <div id="sb-draft" class="status-node">Draft</div>
+    <div id="sb-proposed" class="status-node">Proposed</div>
+    <div id="sb-accepted" class="status-node">Accepted</div>
+  </div>
+  <div id="panels">
+    <div id="vendor-panel" class="panel">
+      <div class="panel-title">Vendor (Party A)</div>
+      <div id="vendor-body"></div>
+    </div>
+    <div id="chain-panel" class="panel">
+      <div class="panel-title">Chain</div>
+      <div id="chain-body"></div>
+    </div>
+    <div id="client-panel" class="panel">
+      <div class="panel-title">Client (Party B)</div>
+      <div id="client-body"></div>
+    </div>
+  </div>
+  <div id="full-view"></div>
+  <div id="narration"><p id="narration-text"></p></div>
+  <div id="nav">
+    <button id="back-btn" onclick="prev()" disabled>&larr; Back</button>
+    <button id="next-btn" onclick="next()" class="primary">Begin</button>
+  </div>
+</div>
+
+<script>
+// ========== UTILITIES ==========
+async function sha256(s) {
+  const d = new TextEncoder().encode(s);
+  const h = await crypto.subtle.digest('SHA-256', d);
+  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function randomHex(n) {
+  const a = new Uint8Array(n); crypto.getRandomValues(a);
+  return Array.from(a).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function trunc(h, n=8) { return h.length<=n+4 ? h : h.slice(0,n)+'..'+h.slice(-4); }
+function $(id) { return document.getElementById(id); }
+function setV(h) { $('vendor-body').innerHTML=h; }
+function setCh(h) { $('chain-body').innerHTML=h; }
+function setCl(h) { $('client-body').innerHTML=h; }
+function setN(h) { $('narration-text').innerHTML=h; }
+function showPanels() { $('panels').classList.remove('hidden'); $('full-view').classList.remove('active'); }
+function showFull(h) { $('panels').classList.add('hidden'); $('full-view').classList.add('active'); $('full-view').innerHTML=h; }
+
+// ========== STATE ==========
+const S = {
+  vendorPub: '', clientPub: '', docPub: '',
+  status: 'draft',
+  version: 0,
+  proposer: '',
+  clauses: {},
+  chain: [],
+  genesisHash: '',
+  schemaHash: '',
+};
+
+const INITIAL_CLAUSES = {
+  scope: 'Vendor shall provide cloud infrastructure management services including monitoring, scaling, and incident response.',
+  payment: 'Client shall pay $50,000 per year, billed annually in advance.',
+  term: 'Agreement effective for 3 years from the date of acceptance.',
+  termination: 'Either party may terminate with 90 days written notice.',
+};
+
+const REVISED_CLAUSES = {
+  payment: 'Client shall pay $35,000 per year, billed quarterly.',
+  term: 'Agreement effective for 2 years from the date of acceptance.',
+  sla: 'Vendor guarantees 99.9% uptime with credits for downtime exceeding SLA.',
+};
+
+async function computeGenesis() {
+  S.vendorPub = randomHex(32);
+  S.clientPub = randomHex(32);
+  S.docPub = randomHex(32);
+  const stateJson = stateToJson();
+  S.genesisHash = await sha256(stateJson);
+  S.schemaHash = await sha256('contract-schema-v1');
+}
+
+function stateToJson() {
+  return JSON.stringify({
+    clauses: S.clauses,
+    last_action: '',
+    proposer: S.proposer,
+    status: S.status,
+    version: S.version,
+  });
+}
+
+async function addChainEntry(action, actor, detail) {
+  const prevHash = S.chain.length === 0 ? S.genesisHash : S.chain[S.chain.length-1].next_hash;
+  const stateJson = stateToJson();
+  const nextHash = await sha256(stateJson);
+  const opJson = JSON.stringify({type:action, args:detail||{}});
+  const sigPayload = prevHash + opJson + nextHash + S.schemaHash;
+  const sig = await sha256(sigPayload);
+  S.chain.push({ action, actor, detail: detail||{}, prev_hash: prevHash, next_hash: nextHash, sig: sig.slice(0,64) });
+}
+
+// ========== RENDERERS ==========
+function renderClauses(clauses, diffs) {
+  const keys = Object.keys(clauses).sort();
+  if (keys.length === 0) return '<div style="color:#484f58;font-size:12px;padding:10px 0">No clauses yet</div>';
+  return keys.map(k => {
+    const diff = diffs && diffs[k];
+    return `<div class="clause">
+      <div class="clause-id">${k}</div>
+      ${diff ? `<div class="clause-old">${diff}</div><div class="clause-text clause-new">${clauses[k]}</div>` : `<div class="clause-text">${clauses[k]}</div>`}
+    </div>`;
+  }).join('');
+}
+
+function renderChainEntries() {
+  if (S.chain.length === 0) return '<div style="color:#484f58;font-size:12px;text-align:center;padding:20px 0">No actions yet</div>';
+  return S.chain.map((e,i) => {
+    const actorLabel = e.actor === 'vendor' ? 'V' : 'C';
+    const actorClass = e.actor === 'vendor' ? 'actor-vendor' : 'actor-client';
+    let desc = e.action;
+    if (e.action === 'edit_clause') desc = `edit: ${e.detail.clause_id}`;
+    return `<div class="chain-entry">
+      <span class="ce-actor ${actorClass}">${actorLabel}</span>
+      <span class="ce-action">${desc}</span>
+      <div class="ce-hash">${trunc(e.prev_hash,5)} &rarr; ${trunc(e.next_hash,5)}</div>
+    </div>`;
+  }).join('');
+}
+
+function updateStatusBar() {
+  for (const s of ['draft','proposed','accepted']) {
+    $('sb-'+s).className = 'status-node' + (S.status===s ? ' active-'+s : '');
+  }
+}
+
+// ========== STEPS ==========
+const steps = [
+  { phase:'setup',     name:'Welcome',      render:renderWelcome, btn:'Begin' },
+  { phase:'draft',     name:'Draft Clauses', render:renderDraft },
+  { phase:'draft',     name:'Propose',       render:renderPropose },
+  { phase:'negotiate', name:'Counter',       render:renderCounter },
+  { phase:'negotiate', name:'Revise',        render:renderRevise },
+  { phase:'negotiate', name:'Re-Propose',    render:renderRePropose },
+  { phase:'accept',    name:'Accept',        render:renderAccept },
+  { phase:'accept',    name:'Locked',        render:renderLocked },
+  { phase:'verify',    name:'Full Chain',    render:renderFullChain },
+  { phase:'tamper',    name:'Tamper Attempt', render:renderTamper },
+  { phase:'tamper',    name:'The Point',     render:renderSummary, btn:'Start Over' },
+];
+
+let cur = 0;
+
+async function next() {
+  // Pre-compute state transitions
+  if (cur === 0) {
+    await computeGenesis();
+  }
+  if (cur === 1) {
+    // Draft -> add clauses
+    for (const [k,v] of Object.entries(INITIAL_CLAUSES)) {
+      S.clauses[k] = v;
+      S.version++;
+      await addChainEntry('edit_clause', 'vendor', {party:'a',clause_id:k,text:v});
+    }
+  }
+  if (cur === 2) {
+    // Propose
+    S.status = 'proposed';
+    S.proposer = 'a';
+    await addChainEntry('propose', 'vendor', {party:'a'});
+  }
+  if (cur === 3) {
+    // Counter
+    S.status = 'draft';
+    S.proposer = '';
+    await addChainEntry('counter', 'client', {party:'b'});
+  }
+  if (cur === 4) {
+    // Revise
+    S.clauses.payment = REVISED_CLAUSES.payment;
+    S.version++;
+    await addChainEntry('edit_clause', 'client', {party:'b',clause_id:'payment',text:REVISED_CLAUSES.payment});
+    S.clauses.term = REVISED_CLAUSES.term;
+    S.version++;
+    await addChainEntry('edit_clause', 'client', {party:'b',clause_id:'term',text:REVISED_CLAUSES.term});
+    S.clauses.sla = REVISED_CLAUSES.sla;
+    S.version++;
+    await addChainEntry('edit_clause', 'client', {party:'b',clause_id:'sla',text:REVISED_CLAUSES.sla});
+  }
+  if (cur === 5) {
+    // Re-propose
+    S.status = 'proposed';
+    S.proposer = 'b';
+    await addChainEntry('propose', 'client', {party:'b'});
+  }
+  if (cur === 6) {
+    // Accept
+    S.status = 'accepted';
+    await addChainEntry('accept', 'vendor', {party:'a'});
+  }
+
+  cur++;
+  if (cur >= steps.length) {
+    cur = 0;
+    S.status = 'draft'; S.version = 0; S.proposer = ''; S.clauses = {}; S.chain = [];
+  }
+  await steps[cur].render();
+  updateStatusBar();
+  updateUI();
+}
+
+function prev() { if (cur<=0) return; cur--; steps[cur].render(); updateStatusBar(); updateUI(); }
+
+function updateUI() {
+  const s = steps[cur];
+  for (const p of ['setup','draft','negotiate','accept','verify','tamper']) {
+    $('ph-'+p).className = 'phase-label ' + (s.phase===p ? 'active-'+p : 'inactive');
+  }
+  $('step-name').textContent = s.name;
+  $('step-dots').innerHTML = steps.map((_,i) =>
+    `<span class="dot${i===cur?' active':i<cur?' done':''}"></span>`
+  ).join('');
+  $('back-btn').disabled = cur===0;
+  $('next-btn').textContent = s.btn || 'Next \u2192';
+}
+
+function renderWelcome() {
+  showPanels();
+  setV(`<div class="info-box">
+    <h3>Vendor (Party A)</h3>
+    <p>Drafts the initial contract. Proposes terms. Has the final say on acceptance.</p>
+    <p style="margin-top:6px;font-size:11px;color:var(--text-muted)">Key: <code style="font-size:10px">&lt;generated&gt;</code></p>
+  </div>`);
+  setCh('<div style="color:#484f58;font-size:12px;text-align:center;padding:40px 0">Chain will appear here</div>');
+  setCl(`<div class="info-box">
+    <h3>Client (Party B)</h3>
+    <p>Reviews proposals. Can counter with revisions. Accepts or rejects terms.</p>
+    <p style="margin-top:6px;font-size:11px;color:var(--text-muted)">Key: <code style="font-size:10px">&lt;generated&gt;</code></p>
+  </div>`);
+  setN('A two-party contract negotiation. Every edit, every proposal, every counter-offer is <strong>signed</strong> and <strong>hash-linked</strong>. Neither party can deny what they agreed to. The document is the agreement <em>and</em> its proof.');
+}
+
+async function renderDraft() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Drafting initial terms</div></div>
+    ${renderClauses(S.clauses)}
+    <div class="section" style="margin-top:8px"><div class="label">Version</div><div class="value">${S.version}</div></div>
+    <div class="callout">4 clauses added. Each edit is a signed chain entry.</div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`<div style="color:#484f58;font-size:12px;padding:20px 0">Waiting for Vendor's proposal...</div>`);
+  setN('The <strong>Vendor</strong> drafts four clauses: scope, payment ($50k/yr), term (3 years), and termination (90 days notice). Each clause edit creates a <strong>signed chain entry</strong> &mdash; ' + S.chain.length + ' entries so far.');
+}
+
+async function renderPropose() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:var(--purple)">PROPOSED</div></div>
+    ${renderClauses(S.clauses)}
+    <div class="callout good">Proposal submitted and signed by Vendor.</div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Received proposal from Vendor</div></div>
+    ${renderClauses(S.clauses)}
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">Options: <strong>accept</strong>, <strong>counter</strong>, or <strong>withdraw</strong></div>
+  `);
+  setN('The Vendor <strong>proposes</strong> the contract. Status changes to <strong>proposed</strong>. The Client now sees the terms and can accept, counter, or walk away. The proposal action is signed by the Vendor\'s key.');
+}
+
+async function renderCounter() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:var(--orange)">DRAFT (countered)</div></div>
+    <div style="color:var(--text-muted);font-size:12px;padding:10px 0">Client has countered. Waiting for revised terms...</div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Counter-proposal</div>
+      <div style="font-size:12px;color:var(--text-muted)">Status reset to draft. Client can now edit clauses.</div></div>
+    <div class="callout warn">Counter signed by Client's key. The chain records that Client rejected the first proposal.</div>
+  `);
+  setN('The <strong>Client counters</strong>. Status resets to <strong>draft</strong>. The counter action is signed by the Client\'s key &mdash; the chain permanently records that the first proposal was rejected.');
+}
+
+async function renderRevise() {
+  showPanels();
+  const diffs = {
+    payment: INITIAL_CLAUSES.payment,
+    term: INITIAL_CLAUSES.term,
+  };
+  setV(`
+    <div style="color:var(--text-muted);font-size:12px;padding:10px 0">Client is revising terms...</div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Revising clauses</div></div>
+    ${renderClauses(S.clauses, diffs)}
+    <div class="clause" style="border-color:var(--green)">
+      <div class="clause-id" style="color:var(--green)">sla (new)</div>
+      <div class="clause-text clause-new">${S.clauses.sla}</div>
+    </div>
+    <div class="section" style="margin-top:8px"><div class="label">Version</div><div class="value">${S.version}</div></div>
+    <div class="callout">3 edits: reduced payment to $35k quarterly, shortened term to 2 years, added SLA clause.</div>
+  `);
+  setN('The <strong>Client revises</strong> three clauses: payment reduced to <strong>$35k quarterly</strong>, term shortened to <strong>2 years</strong>, and a new <strong>SLA clause</strong> added. Each edit is a separate signed chain entry.');
+}
+
+async function renderRePropose() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Received revised proposal</div></div>
+    ${renderClauses(S.clauses)}
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">Options: <strong>accept</strong> or <strong>counter</strong></div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:var(--purple)">PROPOSED</div></div>
+    ${renderClauses(S.clauses)}
+    <div class="callout good">Revised proposal submitted and signed by Client.</div>
+  `);
+  setN('The <strong>Client proposes</strong> the revised contract. Now the <strong>Vendor</strong> reviews. The chain shows the full negotiation history: initial draft, first proposal, counter, revisions, second proposal.');
+}
+
+async function renderAccept() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:var(--green);font-size:16px">ACCEPTED</div></div>
+    ${renderClauses(S.clauses)}
+    <div class="callout good">Contract accepted and signed by Vendor. Agreement is now <strong>immutable</strong>.</div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:var(--green);font-size:16px">ACCEPTED</div></div>
+    ${renderClauses(S.clauses)}
+    <div class="callout good">Both parties have agreed. The contract is final.</div>
+  `);
+  setN('The <strong>Vendor accepts</strong>. The contract status is now <strong>accepted</strong>. Both parties\' signatures are in the chain. The document is now <strong>immutable</strong> &mdash; no further edits, proposals, or withdrawals are possible.');
+}
+
+async function renderLocked() {
+  showPanels();
+  setV(`
+    <div class="section"><div class="label">Attempt: Edit a clause</div></div>
+    <div class="guard-box">
+      <div class="guard-label">Guard Rejected</div>
+      <div class="guard-expr">status != "accepted"</div>
+      <div class="guard-reason">Cannot edit clauses after contract is accepted. Status is "accepted".</div>
+    </div>
+    <div class="section" style="margin-top:12px"><div class="label">Attempt: Withdraw</div></div>
+    <div class="guard-box">
+      <div class="guard-label">Guard Rejected</div>
+      <div class="guard-expr">status != "accepted"</div>
+      <div class="guard-reason">Cannot withdraw an accepted contract.</div>
+    </div>
+  `);
+  setCh(renderChainEntries());
+  setCl(`
+    <div class="section"><div class="label">Attempt: Counter</div></div>
+    <div class="guard-box">
+      <div class="guard-label">Guard Rejected</div>
+      <div class="guard-expr">status == "proposed"</div>
+      <div class="guard-reason">Cannot counter. Contract is already accepted.</div>
+    </div>
+    <div class="section" style="margin-top:12px"><div class="label">Attempt: Accept (again)</div></div>
+    <div class="guard-box">
+      <div class="guard-label">Guard Rejected</div>
+      <div class="guard-expr">status == "proposed"</div>
+      <div class="guard-reason">Contract is already accepted. No further actions allowed.</div>
+    </div>
+  `);
+  setN('The contract is <strong>locked</strong>. Every possible mutation is rejected by the schema guards: edit, withdraw, counter, even accept-again. The guards enforce: <code>status != "accepted"</code>. Once accepted, the agreement is final.');
+}
+
+async function renderFullChain() {
+  let rows = '';
+  for (let i=0;i<S.chain.length;i++) {
+    const e = S.chain[i];
+    const actorLabel = e.actor === 'vendor' ? 'Vendor' : 'Client';
+    const actorClass = e.actor === 'vendor' ? 'actor-vendor' : 'actor-client';
+    let desc = e.action;
+    if (e.action === 'edit_clause') desc = `edit: ${e.detail.clause_id}`;
+    rows += `<div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+      <div>
+        <strong>${i+1}. ${desc}</strong> &mdash; <span class="ce-actor ${actorClass}" style="font-size:10px">${actorLabel}</span>
+        <br><span style="font-size:11px;color:var(--text-muted)"><code style="font-size:10px">${trunc(e.prev_hash,6)}</code> &rarr; <code style="font-size:10px">${trunc(e.next_hash,6)}</code> &bull; sig: <code style="font-size:10px">${trunc(e.sig,8)}</code></span>
+      </div></div>`;
+  }
+
+  showFull(`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:#f0f6fc;font-size:18px">Complete Chain: ${S.chain.length} Entries</h3>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:4px">Every action recorded, signed, and hash-linked</p>
+    </div>
+    <div style="max-width:650px;margin:0 auto">
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Genesis hash</strong><br><span style="font-size:12px;color:var(--text-muted)">chain[0].prev_hash matches SHA-256 of empty contract state</span></div></div>
+      ${rows}
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Final state hash</strong><br><span style="font-size:12px;color:var(--text-muted)">Current state hash matches chain[${S.chain.length-1}].next_hash</span></div></div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Document signature</strong><br><span style="font-size:12px;color:var(--text-muted)">Authority signature valid</span></div></div>
+      <div class="callout good" style="margin-top:16px;text-align:center">All checks passed. Complete negotiation history verified.</div>
+    </div>
+  `);
+  setN(`<strong>${S.chain.length} chain entries</strong> tell the complete story: 4 initial edits by Vendor, proposal, Client's counter, 3 revisions by Client, second proposal, Vendor's acceptance. Every action signed by the party who took it.`);
+}
+
+async function renderTamper() {
+  const realClauseJson = JSON.stringify(S.clauses);
+  const fakeClause = {...S.clauses, payment: 'Client shall pay $75,000 per year, billed annually in advance.'};
+  const fakeStateJson = JSON.stringify({
+    clauses: fakeClause,
+    last_action: '',
+    proposer: S.proposer,
+    status: S.status,
+    version: S.version,
+  });
+  const realHash = S.chain[S.chain.length-1].next_hash;
+  const fakeHash = await sha256(fakeStateJson);
+
+  showFull(`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:var(--red);font-size:18px">Tamper Attempt: Modify the Payment Clause</h3>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:4px">What if someone changed the accepted payment from $35k to $75k?</p>
+    </div>
+    <div style="max-width:650px;margin:0 auto">
+      <div class="callout bad" style="margin-bottom:16px">
+        <strong>Modification:</strong> clauses.payment changed from<br>
+        <span style="text-decoration:line-through">"$35,000 per year, billed quarterly"</span><br>
+        to <span style="color:var(--red)">"$75,000 per year, billed annually in advance"</span>
+      </div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Chain replay (entries 1-${S.chain.length})</strong><br>
+        <span style="font-size:12px;color:var(--text-muted)">All chain entries internally consistent (chain wasn't modified)</span></div></div>
+      <div class="verify-row verify-fail"><div class="icon">&#10007;</div>
+        <div><strong style="color:var(--red)">Final state hash mismatch</strong><br>
+        <span style="font-size:12px;color:var(--red)">chain[${S.chain.length-1}].next_hash does not match SHA-256(current state)</span>
+        <br><span style="font-size:11px;color:var(--text-muted)">Expected: <code style="font-size:10px">${trunc(realHash,14)}</code></span>
+        <br><span style="font-size:11px;color:var(--text-muted)">Got: <code style="font-size:10px">${trunc(fakeHash,14)}</code></span></div></div>
+      <div class="verify-row verify-fail"><div class="icon">&#10007;</div>
+        <div><strong style="color:var(--red)">Document signature invalid</strong><br>
+        <span style="font-size:12px;color:var(--red)">State changed &mdash; authority signature no longer covers the modified content</span></div></div>
+      <div class="callout bad" style="margin-top:16px;text-align:center">
+        <strong>Caught.</strong> The accepted terms cannot be altered without detection. Neither party can claim the agreement was different.
+      </div>
+    </div>
+  `);
+  setN('Someone tried to change the agreed payment from <strong>$35k</strong> to <strong>$75k</strong>. The final state hash no longer matches the chain, and the document signature is invalid. <strong>The contract catches the lie.</strong> Both parties can independently verify the true terms.');
+}
+
+function renderSummary() {
+  showFull(`
+    <div style="text-align:center;max-width:650px;margin:0 auto;padding:30px 0">
+      <h3 style="color:var(--green);font-size:22px;margin-bottom:16px">The Agreement Proves Itself</h3>
+      <p style="font-size:15px;line-height:1.7;margin-bottom:20px">
+        Two parties. Three rounds. ${S.chain.length} signed, hash-linked chain entries.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left;margin-bottom:24px">
+        <div class="callout good">
+          <strong>Non-Repudiation</strong><br>
+          Every action is signed by the party who took it. Neither can deny what they did.
+        </div>
+        <div class="callout good">
+          <strong>Immutability</strong><br>
+          Once accepted, the contract is locked. Schema guards reject all further mutations.
+        </div>
+        <div class="callout good">
+          <strong>Audit Trail</strong><br>
+          The chain records the full history: drafts, proposals, counters, revisions, acceptance.
+        </div>
+        <div class="callout good">
+          <strong>Tamper Evidence</strong><br>
+          Change any clause in the accepted contract &mdash; the hash chain and signature catch it.
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted)">
+        No notary. No server. No blockchain. The document carries its own proof.
+      </p>
+      <p style="margin-top:16px">
+        <a href="index.html" style="color:var(--accent);text-decoration:none">&larr; Back to Tessera</a>
+        &nbsp;&middot;&nbsp;
+        <a href="chess.html" style="color:var(--accent);text-decoration:none">Try the Chess Demo &rarr;</a>
+      </p>
+    </div>
+  `);
+  setN('<strong>Both parties agreed. The chain proves it. Neither can deny their actions.</strong> Tessera doesn\'t just store the contract &mdash; it stores the entire negotiation, cryptographically signed and hash-linked. The document is the agreement and its proof.');
+}
+
+// ========== INIT ==========
+function init() { steps[0].render(); updateStatusBar(); updateUI(); }
+window.onload = init;
+</script>
+</body>
+</html>

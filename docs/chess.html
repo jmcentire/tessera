@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tessera Chess Demo</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-muted: #8b949e; --accent: #58a6ff;
+    --accent-dim: #1f6feb; --green: #3fb950; --red: #f85149;
+    --orange: #d29922; --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  #app { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  header { text-align: center; padding: 20px 0 12px; }
+  header h1 { font-size: 26px; color: #f0f6fc; letter-spacing: 0.5px; }
+  header .subtitle { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+  header .subtitle a { color: var(--accent); text-decoration: none; }
+
+  #phase-bar { display: flex; justify-content: center; gap: 32px; padding: 10px 0; }
+  .phase-label { padding: 5px 16px; border-radius: 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; }
+  .phase-label.active-setup { background: var(--accent-dim); color: #fff; }
+  .phase-label.active-game { background: var(--green); color: #0d1117; }
+  .phase-label.active-verify { background: var(--purple); color: #0d1117; }
+  .phase-label.active-tamper { background: var(--red); color: #fff; }
+  .phase-label.inactive { color: #484f58; background: transparent; }
+
+  #step-bar { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 6px 0 14px; }
+  #step-name { font-size: 14px; color: var(--text-muted); }
+  #step-dots { display: flex; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #21262d; transition: background 0.2s; }
+  .dot.active { background: var(--accent); }
+  .dot.done { background: var(--green); }
+
+  #panels { display: grid; grid-template-columns: 1fr 200px 1fr; gap: 12px; min-height: 420px; }
+  #panels.hidden { display: none; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-y: auto; max-height: 520px; }
+  .panel-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
+  #board-panel { border-color: var(--green); }
+  #board-panel .panel-title { color: var(--green); }
+  #chain-panel { border-color: var(--purple); }
+  #chain-panel .panel-title { color: var(--purple); }
+  #doc-panel { border-color: var(--accent); }
+  #doc-panel .panel-title { color: var(--accent); }
+
+  #full-view { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; max-height: 520px; overflow-y: auto; }
+  #full-view.active { display: block; }
+
+  #narration { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 14px 0; min-height: 50px; }
+  #narration-text { font-size: 14px; line-height: 1.6; }
+  #narration-text strong { color: #f0f6fc; }
+
+  #nav { display: flex; justify-content: space-between; padding: 4px 0; }
+  #nav button { background: #21262d; color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; transition: background 0.15s; }
+  #nav button:hover:not(:disabled) { background: #30363d; }
+  #nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+  #nav button.primary { background: #238636; border-color: #2ea043; color: #fff; }
+  #nav button.primary:hover:not(:disabled) { background: #2ea043; }
+
+  .mono { font-family: 'SF Mono','Fira Code',monospace; }
+  .hash { font-family: 'SF Mono','Fira Code',monospace; font-size: 12px; color: var(--purple); word-break: break-all; }
+  .section { margin-bottom: 10px; }
+  .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .value { font-family: 'SF Mono','Fira Code',monospace; font-size: 13px; color: #f0f6fc; }
+  .callout { background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+  .callout.good { border-color: #238636; color: var(--green); }
+  .callout.bad { border-color: var(--red); color: var(--red); }
+  .info-box h3 { font-size: 16px; color: #f0f6fc; margin-bottom: 6px; }
+  .info-box p { font-size: 13px; line-height: 1.5; margin-bottom: 4px; }
+
+  /* Chess board */
+  .board { display: grid; grid-template-columns: repeat(8,1fr); width: 100%; aspect-ratio: 1; border: 2px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .sq { display: flex; align-items: center; justify-content: center; font-size: 0; aspect-ratio: 1; position: relative; }
+  .sq span { font-size: min(4vw, 32px); line-height: 1; }
+  .sq-light { background: #b58863; }
+  .sq-dark { background: #f0d9b5; }
+  .sq.highlight { box-shadow: inset 0 0 0 3px var(--green); }
+  .sq.highlight-bad { box-shadow: inset 0 0 0 3px var(--red); }
+
+  /* Chain entries */
+  .chain-entry { background: #0d1117; border: 1px solid var(--border); border-radius: 4px; padding: 6px 8px; margin-bottom: 6px; font-size: 11px; }
+  .chain-entry .ce-move { font-weight: 600; color: #f0f6fc; }
+  .chain-entry .ce-hash { font-family: 'SF Mono',monospace; font-size: 10px; color: var(--purple); }
+  .chain-entry .ce-actor { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+  .actor-w { background: #f0f6fc; color: #0d1117; }
+  .actor-b { background: #484f58; color: #f0f6fc; }
+
+  /* Verify checkmarks */
+  .verify-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .verify-row .icon { font-size: 16px; width: 20px; text-align: center; }
+  .verify-ok .icon { color: var(--green); }
+  .verify-fail .icon { color: var(--red); }
+
+  @media (max-width: 768px) {
+    #panels { grid-template-columns: 1fr; }
+    #chain-panel { order: 3; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Tessera Chess</h1>
+    <p class="subtitle">Interactive integrity demo &mdash; <a href="index.html">back to Tessera</a></p>
+  </header>
+  <div id="phase-bar">
+    <span id="ph-setup" class="phase-label inactive">Setup</span>
+    <span id="ph-game" class="phase-label inactive">Game</span>
+    <span id="ph-verify" class="phase-label inactive">Verify</span>
+    <span id="ph-tamper" class="phase-label inactive">Tamper</span>
+  </div>
+  <div id="step-bar">
+    <span id="step-name"></span>
+    <div id="step-dots"></div>
+  </div>
+  <div id="panels">
+    <div id="board-panel" class="panel">
+      <div class="panel-title">Board</div>
+      <div id="board-body"></div>
+    </div>
+    <div id="chain-panel" class="panel">
+      <div class="panel-title">Chain</div>
+      <div id="chain-body"></div>
+    </div>
+    <div id="doc-panel" class="panel">
+      <div class="panel-title">Document</div>
+      <div id="doc-body"></div>
+    </div>
+  </div>
+  <div id="full-view"></div>
+  <div id="narration"><p id="narration-text"></p></div>
+  <div id="nav">
+    <button id="back-btn" onclick="prev()" disabled>&larr; Back</button>
+    <button id="next-btn" onclick="next()" class="primary">Begin</button>
+  </div>
+</div>
+
+<script>
+// ========== UTILITIES ==========
+async function sha256(s) {
+  const d = new TextEncoder().encode(s);
+  const h = await crypto.subtle.digest('SHA-256', d);
+  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function randomHex(n) {
+  const a = new Uint8Array(n); crypto.getRandomValues(a);
+  return Array.from(a).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function trunc(h, n=8) { return h.length<=n+4 ? h : h.slice(0,n)+'..'+h.slice(-4); }
+function $(id) { return document.getElementById(id); }
+function setB(h) { $('board-body').innerHTML=h; }
+function setC(h) { $('chain-body').innerHTML=h; }
+function setD(h) { $('doc-body').innerHTML=h; }
+function setN(h) { $('narration-text').innerHTML=h; }
+function showPanels() { $('panels').classList.remove('hidden'); $('full-view').classList.remove('active'); }
+function showFull(h) { $('panels').classList.add('hidden'); $('full-view').classList.add('active'); $('full-view').innerHTML=h; }
+
+// ========== CHESS LOGIC ==========
+const PIECES = { K:'\u2654', Q:'\u2655', R:'\u2656', B:'\u2657', N:'\u2658', P:'\u2659',
+                 k:'\u265A', q:'\u265B', r:'\u265C', b:'\u265D', n:'\u265E', p:'\u265F' };
+const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+
+function fenToBoard(fen) {
+  const rows = fen.split(' ')[0].split('/');
+  const board = [];
+  for (const row of rows) {
+    const r = [];
+    for (const c of row) {
+      if (c >= '1' && c <= '8') { for (let i=0;i<parseInt(c);i++) r.push(null); }
+      else r.push(c);
+    }
+    board.push(r);
+  }
+  return board;
+}
+
+function boardToFen(board, turn, castling, ep, half, full) {
+  let fen = '';
+  for (let r=0;r<8;r++) {
+    let empty = 0;
+    for (let c=0;c<8;c++) {
+      if (!board[r][c]) { empty++; }
+      else { if (empty) { fen += empty; empty=0; } fen += board[r][c]; }
+    }
+    if (empty) fen += empty;
+    if (r < 7) fen += '/';
+  }
+  return `${fen} ${turn} ${castling} ${ep} ${half} ${full}`;
+}
+
+function applyUCI(fen, uci) {
+  const board = fenToBoard(fen);
+  const parts = fen.split(' ');
+  let turn = parts[1], castling = parts[2], ep = parts[3];
+  let half = parseInt(parts[4]), full = parseInt(parts[5]);
+
+  const fc = uci.charCodeAt(0) - 97, fr = 8 - parseInt(uci[1]);
+  const tc = uci.charCodeAt(2) - 97, tr = 8 - parseInt(uci[3]);
+  const promo = uci.length > 4 ? uci[4] : null;
+
+  const piece = board[fr][fc];
+  const captured = board[tr][tc];
+  board[fr][fc] = null;
+
+  if (promo) {
+    board[tr][tc] = turn === 'w' ? promo.toUpperCase() : promo.toLowerCase();
+  } else {
+    board[tr][tc] = piece;
+  }
+
+  // En passant capture
+  if ((piece === 'P' || piece === 'p') && tc !== fc && !captured) {
+    board[fr][tc] = null;
+  }
+
+  // Castling - move rook
+  if (piece === 'K' || piece === 'k') {
+    if (Math.abs(tc - fc) === 2) {
+      if (tc > fc) { board[fr][5] = board[fr][7]; board[fr][7] = null; }
+      else { board[fr][3] = board[fr][0]; board[fr][0] = null; }
+    }
+  }
+
+  // Update castling rights
+  if (piece === 'K') castling = castling.replace(/[KQ]/g,'');
+  if (piece === 'k') castling = castling.replace(/[kq]/g,'');
+  if (piece === 'R' && fr===7 && fc===7) castling = castling.replace('K','');
+  if (piece === 'R' && fr===7 && fc===0) castling = castling.replace('Q','');
+  if (piece === 'r' && fr===0 && fc===7) castling = castling.replace('k','');
+  if (piece === 'r' && fr===0 && fc===0) castling = castling.replace('q','');
+  if (!castling) castling = '-';
+
+  // En passant
+  if ((piece === 'P' || piece === 'p') && Math.abs(tr - fr) === 2) {
+    const epr = turn === 'w' ? fr - 1 : fr + 1;
+    ep = String.fromCharCode(97+fc) + (8-epr);
+  } else {
+    ep = '-';
+  }
+
+  half = (piece === 'P' || piece === 'p' || captured) ? 0 : half + 1;
+  if (turn === 'b') full++;
+  turn = turn === 'w' ? 'b' : 'w';
+
+  return { fen: boardToFen(board, turn, castling, ep, half, full), from: [fr,fc], to: [tr,tc] };
+}
+
+function renderBoard(fen, highlights) {
+  const board = fenToBoard(fen);
+  let html = '<div class="board">';
+  for (let r=0;r<8;r++) {
+    for (let c=0;c<8;c++) {
+      const light = (r+c)%2===0;
+      const key = `${r},${c}`;
+      let cls = light ? 'sq sq-light' : 'sq sq-dark';
+      if (highlights && highlights.good && highlights.good.includes(key)) cls += ' highlight';
+      if (highlights && highlights.bad && highlights.bad.includes(key)) cls += ' highlight-bad';
+      const piece = board[r][c] ? `<span>${PIECES[board[r][c]]}</span>` : '';
+      html += `<div class="${cls}">${piece}</div>`;
+    }
+  }
+  html += '</div>';
+  return html;
+}
+
+// ========== STATE ==========
+const S = {
+  whitePub: '', blackPub: '',
+  whiteSig: '', blackSig: '',
+  docPub: '', docSig: '',
+  fen: START_FEN,
+  status: 'active',
+  moveCount: 0,
+  chain: [],       // { move_san, move_uci, actor, prev_hash, next_hash, sig, from, to }
+  genesisHash: '',
+  schemaHash: '',
+};
+
+// Scholar's Mate moves
+const MOVES = [
+  { uci:'e2e4', san:'e4',   actor:'w' },
+  { uci:'e7e5', san:'e5',   actor:'b' },
+  { uci:'f1c4', san:'Bc4',  actor:'w' },
+  { uci:'b8c6', san:'Nc6',  actor:'b' },
+  { uci:'d1h5', san:'Qh5',  actor:'w' },
+  { uci:'g8f6', san:'Nf6?', actor:'b' },
+  { uci:'h5f7', san:'Qxf7#',actor:'w' },
+];
+
+async function computeGenesis() {
+  S.whitePub = randomHex(32);
+  S.blackPub = randomHex(32);
+  S.docPub = randomHex(32);
+  const stateJson = JSON.stringify({fen:START_FEN,last_move:'',move_count:0,status:'active'});
+  S.genesisHash = await sha256(stateJson);
+  S.schemaHash = await sha256('chess-schema-v1');
+  S.docSig = randomHex(64);
+}
+
+async function computeMove(idx) {
+  const m = MOVES[idx];
+  const prevHash = S.chain.length === 0 ? S.genesisHash : S.chain[S.chain.length-1].next_hash;
+  const result = applyUCI(S.fen, m.uci);
+  S.fen = result.fen;
+  S.moveCount++;
+
+  const isCheckmate = (idx === 6);
+  if (isCheckmate) S.status = 'white_wins';
+
+  const stateJson = JSON.stringify({fen:S.fen,last_move:m.uci,move_count:S.moveCount,status:S.status});
+  const nextHash = await sha256(stateJson);
+  const opJson = JSON.stringify({type:'make_move',args:{move_uci:m.uci}});
+  const sigPayload = prevHash + opJson + nextHash + S.schemaHash;
+  const sigHash = await sha256(sigPayload);
+
+  S.chain.push({
+    move_san: m.san,
+    move_uci: m.uci,
+    actor: m.actor,
+    prev_hash: prevHash,
+    next_hash: nextHash,
+    sig: sigHash.slice(0,64), // simulated signature
+    from: `${result.from[0]},${result.from[1]}`,
+    to: `${result.to[0]},${result.to[1]}`,
+  });
+}
+
+// ========== RENDERERS ==========
+function renderChainEntries(upTo, tamperIdx) {
+  if (S.chain.length === 0) return '<div style="color:#484f58;font-size:12px;text-align:center;padding:20px 0">No moves yet</div>';
+  let html = '';
+  const n = upTo !== undefined ? Math.min(upTo, S.chain.length) : S.chain.length;
+  for (let i=0;i<n;i++) {
+    const e = S.chain[i];
+    const moveNum = Math.floor(i/2) + 1;
+    const color = e.actor === 'w' ? 'W' : 'B';
+    const isTampered = tamperIdx !== undefined && i === tamperIdx;
+    const border = isTampered ? 'border-color:'+getComputedStyle(document.documentElement).getPropertyValue('--red') : '';
+    html += `<div class="chain-entry" style="${border}">
+      <span class="ce-actor ${e.actor==='w'?'actor-w':'actor-b'}">${color}</span>
+      <span class="ce-move">${moveNum}${e.actor==='b'?'..':'.'}${e.move_san}</span>
+      <div class="ce-hash">${trunc(e.prev_hash,6)} &rarr; ${trunc(e.next_hash,6)}</div>
+    </div>`;
+  }
+  return html;
+}
+
+function renderDocState() {
+  return `
+    <div class="section"><div class="label">Status</div>
+      <div class="value" style="color:${S.status==='active'?'var(--green)':S.status==='white_wins'?'var(--orange)':'var(--text)'}">${S.status}</div></div>
+    <div class="section"><div class="label">Move Count</div><div class="value">${S.moveCount}</div></div>
+    <div class="section"><div class="label">FEN</div>
+      <div class="mono" style="font-size:10px;color:var(--text-muted);word-break:break-all">${S.fen}</div></div>
+    <div class="section"><div class="label">Chain Length</div><div class="value">${S.chain.length}</div></div>
+    <div class="section"><div class="label">White Key</div>
+      <div class="hash" style="font-size:10px">${trunc(S.whitePub,10)}</div></div>
+    <div class="section"><div class="label">Black Key</div>
+      <div class="hash" style="font-size:10px">${trunc(S.blackPub,10)}</div></div>
+  `;
+}
+
+// ========== STEPS ==========
+const steps = [
+  { phase:'setup', name:'Welcome', render:renderWelcome, btn:'Begin' },
+  { phase:'game',  name:'Genesis', render:renderGenesis },
+  { phase:'game',  name:'White: e4', render:()=>renderMove(0) },
+  { phase:'game',  name:'Black: e5', render:()=>renderMove(1) },
+  { phase:'game',  name:"Scholar's Mate", render:renderScholars },
+  { phase:'game',  name:'Checkmate', render:renderCheckmate },
+  { phase:'verify',name:'Replay Chain', render:renderVerify },
+  { phase:'tamper',name:'Tamper: Move', render:renderTamperMove },
+  { phase:'tamper',name:'Tamper: State', render:renderTamperState },
+  { phase:'tamper',name:'The Point', render:renderSummary, btn:'Start Over' },
+];
+
+let cur = 0;
+
+async function next() {
+  if (cur === 0) await computeGenesis();
+  if (cur === 1) await computeMove(0); // compute move for step 2
+  if (cur === 2) await computeMove(1); // compute move for step 3
+  if (cur === 3) { for (let i=2;i<7;i++) await computeMove(i); } // remaining moves for Scholar's Mate
+  cur++;
+  if (cur >= steps.length) {
+    cur = 0;
+    S.fen = START_FEN; S.status = 'active'; S.moveCount = 0; S.chain = [];
+  }
+  await steps[cur].render();
+  updateUI();
+}
+function prev() { if (cur<=0) return; cur--; steps[cur].render(); updateUI(); }
+
+function updateUI() {
+  const s = steps[cur];
+  for (const p of ['setup','game','verify','tamper']) {
+    $('ph-'+p).className = 'phase-label ' + (s.phase===p ? 'active-'+p : 'inactive');
+  }
+  $('step-name').textContent = s.name;
+  $('step-dots').innerHTML = steps.map((_,i) =>
+    `<span class="dot${i===cur?' active':i<cur?' done':''}"></span>`
+  ).join('');
+  $('back-btn').disabled = cur===0;
+  $('next-btn').textContent = s.btn || 'Next \u2192';
+}
+
+function renderWelcome() {
+  showPanels();
+  setB(`<div class="info-box">
+    <h3>A Chess Game in a Document</h3>
+    <p>Two players. Seven moves. Scholar's Mate.</p>
+    <p style="margin-top:8px">Every move is <strong>signed</strong> by the player who made it and <strong>hash-linked</strong> to the previous state.</p>
+    <p style="margin-top:8px">The document carries its own proof. No server, no referee, no trust required.</p>
+  </div>`);
+  setC('<div style="color:#484f58;font-size:12px;text-align:center;padding:40px 0">Chain will appear here as moves are played</div>');
+  setD(`<div class="info-box">
+    <p style="font-size:12px;color:var(--text-muted)">We'll generate two keypairs (simulated Ed25519) &mdash; one for White, one for Black. Each player signs their own moves.</p>
+  </div>`);
+  setN('A complete chess game encoded as a Tessera document. Every move signed, every state hashed. At the end, we\'ll <strong>tamper</strong> with the document and watch the chain catch it.');
+}
+
+async function renderGenesis() {
+  showPanels();
+  const hl = {};
+  setB(renderBoard(START_FEN, hl));
+  setC(renderChainEntries());
+  setD(`
+    <div class="section"><div class="label">Genesis Hash</div>
+      <div class="hash">${trunc(S.genesisHash, 14)}</div></div>
+    <div class="section"><div class="label">Schema Hash</div>
+      <div class="hash">${trunc(S.schemaHash, 14)}</div></div>
+    <div class="section"><div class="label">White Key</div>
+      <div class="hash" style="font-size:10px">${trunc(S.whitePub,14)}</div></div>
+    <div class="section"><div class="label">Black Key</div>
+      <div class="hash" style="font-size:10px">${trunc(S.blackPub,14)}</div></div>
+    <div class="section"><div class="label">Document Authority</div>
+      <div class="hash" style="font-size:10px">${trunc(S.docPub,14)}</div></div>
+    <div class="callout good">Document created. Initial state hashed. Ready for the first move.</div>
+  `);
+  setN('The <strong>genesis state</strong> is the starting position. Its SHA-256 hash becomes the anchor for the entire chain. Two keypairs generated &mdash; one per player. The game begins.');
+}
+
+async function renderMove(idx) {
+  showPanels();
+  const e = S.chain[idx];
+  setB(renderBoard(S.fen, { good: [e.from, e.to] }));
+  setC(renderChainEntries());
+  setD(renderDocState());
+  const moveNum = Math.floor(idx/2)+1;
+  const color = e.actor==='w' ? 'White' : 'Black';
+  const keyDisp = e.actor==='w' ? trunc(S.whitePub,8) : trunc(S.blackPub,8);
+  setN(`<strong>${color}</strong> plays <strong>${e.move_san}</strong>. The move is hashed with the previous state (<code>${trunc(e.prev_hash,6)}</code>) to produce the next state hash (<code>${trunc(e.next_hash,6)}</code>). Signed by ${color}'s key (<code>${keyDisp}</code>).`);
+}
+
+async function renderScholars() {
+  showPanels();
+  const lastEntry = S.chain[S.chain.length-1];
+  setB(renderBoard(S.fen, { good: [lastEntry.from, lastEntry.to] }));
+  setC(renderChainEntries());
+  setD(renderDocState());
+  setN('The remaining moves of <strong>Scholar\'s Mate</strong>: Bc4, Nc6, Qh5, Nf6?, Qxf7#. Five moves played. Each one signed by its player, each hash-linked to the last. The chain now has <strong>7 entries</strong>.');
+}
+
+async function renderCheckmate() {
+  showPanels();
+  const lastEntry = S.chain[S.chain.length-1];
+  setB(renderBoard(S.fen, { good: [lastEntry.from, lastEntry.to] }));
+  setC(renderChainEntries());
+  setD(renderDocState());
+  setN('<strong>Checkmate.</strong> White wins with Qxf7#. The status field is now <strong>white_wins</strong>. The chain is complete &mdash; 7 signed, hash-linked mutations from the starting position to the final board. Every move attributable, every state verifiable.');
+}
+
+async function renderVerify() {
+  showFull(`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:#f0f6fc;font-size:18px">Chain Verification</h3>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:4px">Replaying from genesis, checking every link</p>
+    </div>
+    <div style="max-width:600px;margin:0 auto">
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Genesis hash</strong><br><span style="font-size:12px;color:var(--text-muted)">chain[0].prev_hash matches SHA-256 of initial state</span></div></div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Schema hash</strong><br><span style="font-size:12px;color:var(--text-muted)">SHA-256 of schema included in every signature payload</span></div></div>
+      ${S.chain.map((e,i) => {
+        const moveNum = Math.floor(i/2)+1;
+        const color = e.actor==='w' ? 'W' : 'B';
+        return `<div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+          <div><strong>${moveNum}${e.actor==='b'?'..':'.'}${e.move_san}</strong> &mdash; <span class="ce-actor ${e.actor==='w'?'actor-w':'actor-b'}" style="font-size:10px">${color}</span>
+          <br><span style="font-size:12px;color:var(--text-muted)">sig verified &bull; hash linkage: <code style="font-size:10px">${trunc(e.prev_hash,6)}</code> &rarr; <code style="font-size:10px">${trunc(e.next_hash,6)}</code></span></div></div>`;
+      }).join('')}
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Final state</strong><br><span style="font-size:12px;color:var(--text-muted)">current state hash matches chain[6].next_hash</span></div></div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Document signature</strong><br><span style="font-size:12px;color:var(--text-muted)">authority signature covers schema + state + chain</span></div></div>
+      <div class="callout good" style="margin-top:16px;text-align:center">All checks passed. The document is valid. Every move is authentic.</div>
+    </div>
+  `);
+  setN('<strong>Chain replay complete.</strong> Starting from genesis, every mutation\'s signature was verified, every hash link confirmed, and the final state matches the last chain entry. The document proves itself.');
+}
+
+async function renderTamperMove() {
+  const tampered = {...S.chain[1]};
+  const originalSan = tampered.move_san;
+  tampered.move_san = 'e6';
+  tampered.move_uci = 'e7e6';
+  const fakeOpJson = JSON.stringify({type:'make_move',args:{move_uci:'e7e6'}});
+  const expectedPayload = tampered.prev_hash + fakeOpJson + tampered.next_hash + S.schemaHash;
+  const expectedHash = await sha256(expectedPayload);
+
+  showFull(`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:var(--red);font-size:18px">Tamper Attempt: Modify a Move</h3>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:4px">What if Black's second move was changed from e5 to e6?</p>
+    </div>
+    <div style="max-width:600px;margin:0 auto">
+      <div class="callout bad" style="margin-bottom:16px">
+        <strong>Modification:</strong> chain[1].op changed from <code>e7e5</code> to <code>e7e6</code>
+      </div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Genesis hash</strong><br><span style="font-size:12px;color:var(--text-muted)">Still valid &mdash; genesis wasn't changed</span></div></div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>1.e4</strong> &mdash; <span class="ce-actor actor-w" style="font-size:10px">W</span>
+        <br><span style="font-size:12px;color:var(--text-muted)">Unmodified &mdash; still valid</span></div></div>
+      <div class="verify-row verify-fail"><div class="icon">&#10007;</div>
+        <div><strong style="color:var(--red)">1..e6 (was e5)</strong> &mdash; <span class="ce-actor actor-b" style="font-size:10px">B</span>
+        <br><span style="font-size:12px;color:var(--red)">Signature mismatch: SHA-256(prev_hash + op + next_hash + schema_hash) does not match stored signature</span>
+        <br><span style="font-size:11px;color:var(--text-muted)">Expected: <code style="font-size:10px">${trunc(S.chain[1].sig,10)}</code></span>
+        <br><span style="font-size:11px;color:var(--text-muted)">Got: <code style="font-size:10px">${trunc(expectedHash.slice(0,64),10)}</code></span></div></div>
+      <div class="callout bad" style="margin-top:16px;text-align:center">
+        <strong>Validation failed.</strong> The operation was changed but the signature wasn't &mdash; because the tamperer doesn't have Black's private key.
+      </div>
+    </div>
+  `);
+  setN('We changed Black\'s move from <strong>e5</strong> to <strong>e6</strong> in the chain. The signature no longer matches because <code>SHA-256(prev_hash + op + next_hash + schema_hash)</code> changed but the signature didn\'t. <strong>Without Black\'s private key, the tamperer can\'t forge a valid signature.</strong>');
+}
+
+async function renderTamperState() {
+  const realStateJson = JSON.stringify({fen:S.fen,last_move:'h5f7',move_count:7,status:'white_wins'});
+  const realHash = await sha256(realStateJson);
+  const fakeStateJson = JSON.stringify({fen:S.fen,last_move:'h5f7',move_count:7,status:'active'});
+  const fakeHash = await sha256(fakeStateJson);
+
+  showFull(`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:var(--red);font-size:18px">Tamper Attempt: Modify Final State</h3>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:4px">What if someone changed the status from "white_wins" back to "active"?</p>
+    </div>
+    <div style="max-width:600px;margin:0 auto">
+      <div class="callout bad" style="margin-bottom:16px">
+        <strong>Modification:</strong> state.status changed from <code>white_wins</code> to <code>active</code>
+      </div>
+      <div class="verify-row verify-ok"><div class="icon">&#10003;</div>
+        <div><strong>Chain replay</strong><br><span style="font-size:12px;color:var(--text-muted)">All 7 mutations valid (chain itself wasn't modified)</span></div></div>
+      <div class="verify-row verify-fail"><div class="icon">&#10007;</div>
+        <div><strong style="color:var(--red)">Final state hash mismatch</strong>
+        <br><span style="font-size:12px;color:var(--red)">chain[6].next_hash doesn't match SHA-256(current state)</span>
+        <br><span style="font-size:11px;color:var(--text-muted)">chain[6].next_hash: <code style="font-size:10px">${trunc(realHash,12)}</code></span>
+        <br><span style="font-size:11px;color:var(--text-muted)">SHA-256(tampered state): <code style="font-size:10px">${trunc(fakeHash,12)}</code></span></div></div>
+      <div class="verify-row verify-fail"><div class="icon">&#10007;</div>
+        <div><strong style="color:var(--red)">Document signature invalid</strong>
+        <br><span style="font-size:12px;color:var(--red)">Authority signature covers SHA-256(schema + state + chain) &mdash; state changed, signature doesn't match</span></div></div>
+      <div class="callout bad" style="margin-top:16px;text-align:center">
+        <strong>Two independent checks failed.</strong> The state hash doesn't match the chain, and the document signature is invalid. Caught twice.
+      </div>
+    </div>
+  `);
+  setN('Changing the final state breaks <strong>two</strong> things: the state hash no longer matches the chain\'s last <code>next_hash</code>, and the document\'s authority signature is invalid. The tamperer would need to forge both the chain and the authority\'s private key. <strong>The document catches every lie.</strong>');
+}
+
+function renderSummary() {
+  showFull(`
+    <div style="text-align:center;max-width:650px;margin:0 auto;padding:30px 0">
+      <h3 style="color:var(--green);font-size:22px;margin-bottom:16px">The Document Proves Itself</h3>
+      <p style="font-size:15px;line-height:1.7;margin-bottom:20px">
+        Seven moves. Seven signed, hash-linked chain entries. Two players, each with their own key.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left;margin-bottom:24px">
+        <div class="callout good">
+          <strong>Integrity</strong><br>
+          Every state transition is hash-linked. Change any byte in any move &mdash; the chain breaks.
+        </div>
+        <div class="callout good">
+          <strong>Attribution</strong><br>
+          Every move is signed by the player who made it. No one can deny their actions.
+        </div>
+        <div class="callout good">
+          <strong>Independence</strong><br>
+          No server, no referee, no authority. Anyone with the document can verify the entire game.
+        </div>
+        <div class="callout good">
+          <strong>Tamper Evidence</strong><br>
+          Modify any move, any state, any signature &mdash; validation fails. Cheaters can cheat but they can't hide it.
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted)">
+        This is Tessera. A self-validating document format. The document is the authority.
+      </p>
+      <p style="margin-top:16px">
+        <a href="index.html" style="color:var(--accent);text-decoration:none">&larr; Back to Tessera</a>
+        &nbsp;&middot;&nbsp;
+        <a href="contract.html" style="color:var(--accent);text-decoration:none">Try the Contract Demo &rarr;</a>
+      </p>
+    </div>
+  `);
+  setN('<strong>Cheaters can cheat but they can\'t hide it.</strong> The engine doesn\'t prevent invalid mutations &mdash; it makes them detectable. Any party who receives this document can replay the chain and verify every step.');
+}
+
+// ========== INIT ==========
+function init() { steps[0].render(); updateUI(); }
+window.onload = init;
+</script>
+</body>
+</html>
