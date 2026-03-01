@@ -1,0 +1,16 @@
+[package]
+name = "tessera-contract-example"
+description = "Contract negotiation on Tessera — self-validating multi-party agreement"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[[bin]]
+name = "contract"
+path = "src/main.rs"
+
+[dependencies]
+tessera-core = { workspace = true }
+tessera-format = { workspace = true }
+tessera-engine = { workspace = true }

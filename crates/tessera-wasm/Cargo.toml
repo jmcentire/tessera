@@ -1,0 +1,18 @@
+[package]
+name = "tessera-wasm"
+description = "WASM bindings for the Tessera engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+tessera-core = { workspace = true }
+tessera-engine = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+# wasm-bindgen = "0.2"  # Uncomment when ready for Phase 2

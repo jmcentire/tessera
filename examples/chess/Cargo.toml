@@ -1,0 +1,17 @@
+[package]
+name = "tessera-chess-example"
+description = "Chess built on Tessera — demonstrates self-validating game state"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[[bin]]
+name = "chess"
+path = "src/main.rs"
+
+[dependencies]
+tessera-core = { workspace = true }
+tessera-format = { workspace = true }
+tessera-engine = { workspace = true }
+serde_json = { workspace = true }

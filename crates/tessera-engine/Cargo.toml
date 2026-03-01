@@ -1,0 +1,20 @@
+[package]
+name = "tessera-engine"
+description = "Validation engine, structural checking, and thin logic layer for Tessera"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+tessera-core = { workspace = true }
+tessera-format = { workspace = true }
+tessera-chain = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+ed25519-dalek = { workspace = true }
+hex = { workspace = true }
+thiserror = { workspace = true }
+rhai = { workspace = true }

@@ -1,0 +1,17 @@
+[package]
+name = "tessera-chain"
+description = "Hash chain construction, validation, and replay for Tessera"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+tessera-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+ed25519-dalek = { workspace = true }
+hex = { workspace = true }
+thiserror = { workspace = true }

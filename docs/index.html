@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tessera &mdash; Self-Validating Executable Document Format</title>
+<meta name="description" content="Tessera is a self-validating document format with cryptographic integrity. The document proves itself.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-dim: #1f6feb;
+    --green: #3fb950;
+    --red: #f85149;
+    --orange: #d29922;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+    background: var(--surface);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2em 1.5em;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5em; }
+
+  /* Hero */
+  .hero {
+    padding: 5em 0 3em;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero h1 {
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero .tagline {
+    font-size: 1.25em;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 1.5em;
+  }
+  .hero .etymology {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95em;
+    max-width: 650px;
+    margin: 0 auto 2em;
+  }
+  .hero-buttons { display: flex; gap: 1em; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.7em 1.5em;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: 0.15s;
+  }
+  .btn-primary { background: var(--accent-dim); color: #fff; }
+  .btn-primary:hover { background: var(--accent); text-decoration: none; }
+  .btn-secondary { border: 1px solid var(--border); color: var(--text); }
+  .btn-secondary:hover { border-color: var(--text-muted); text-decoration: none; }
+
+  /* Principle */
+  .principle {
+    text-align: center;
+    padding: 3em 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .principle blockquote {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--green);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Features */
+  .features {
+    padding: 3em 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .features h2 { font-size: 1.8em; margin-bottom: 1.5em; text-align: center; }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5em;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5em;
+  }
+  .feature-card h3 {
+    font-size: 1.05em;
+    margin-bottom: 0.5em;
+    color: var(--accent);
+  }
+  .feature-card p { font-size: 0.9em; color: var(--text-muted); }
+
+  /* How It Works */
+  .how-it-works {
+    padding: 3em 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .how-it-works h2 { font-size: 1.8em; margin-bottom: 1em; text-align: center; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
+    margin-bottom: 2em;
+  }
+  .step {
+    text-align: center;
+    padding: 1em;
+  }
+  .step-num {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.8em;
+  }
+  .step h3 { font-size: 1em; margin-bottom: 0.4em; }
+  .step p { font-size: 0.85em; color: var(--text-muted); }
+
+  /* Examples */
+  .examples {
+    padding: 3em 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .examples h2 { font-size: 1.8em; margin-bottom: 1.5em; text-align: center; }
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5em;
+  }
+  .example-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5em;
+  }
+  .example-card h3 { font-size: 1.2em; margin-bottom: 0.5em; }
+  .example-card p { font-size: 0.9em; color: var(--text-muted); margin-bottom: 1em; }
+  .example-card ul { list-style: none; padding: 0; }
+  .example-card li {
+    font-size: 0.85em;
+    padding: 0.3em 0;
+    color: var(--text-muted);
+  }
+  .example-card li::before { content: "- "; color: var(--accent); }
+
+  /* Document format */
+  .format {
+    padding: 3em 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .format h2 { font-size: 1.8em; margin-bottom: 1em; text-align: center; }
+  .format p { color: var(--text-muted); margin-bottom: 1em; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+  /* Footer */
+  footer {
+    padding: 3em 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85em;
+  }
+  footer p { margin-bottom: 0.5em; }
+  .license-badges { display: flex; gap: 1em; justify-content: center; margin-top: 1em; }
+  .badge {
+    display: inline-block;
+    padding: 0.3em 0.8em;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <section class="hero">
+    <h1><span>Tessera</span></h1>
+    <p class="tagline">Self-Validating Executable Document Format</p>
+    <p class="etymology">
+      The <em>tessera hospitalis</em> was a Roman token of mutual recognition &mdash;
+      a clay tablet broken between host and guest. The fit proved the relationship
+      without any third party. Tessera the format carries the same property:
+      the document proves itself.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://github.com/jmcentire/tessera" class="btn btn-primary">View on GitHub</a>
+      <a href="https://github.com/jmcentire/tessera/blob/main/SPEC.md" class="btn btn-secondary">Read the Spec</a>
+    </div>
+  </section>
+
+  <section class="principle">
+    <blockquote>
+      Cheaters can cheat but they can't hide it.
+    </blockquote>
+    <p style="color: var(--text-muted); margin-top: 1em; max-width: 600px; margin-left: auto; margin-right: auto;">
+      The engine doesn't prevent invalid mutations &mdash; it makes them detectable.
+      Any party who receives a Tessera document can replay the chain and verify every step.
+    </p>
+  </section>
+
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Cryptographic Integrity</h3>
+        <p>Ed25519 signatures on every mutation. SHA-256 hash chain links each state transition. Content-addressable versioning.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Dual-Format Serialization</h3>
+        <p>JSON for readability, CBOR for efficiency. Content-sniffed on load. Round-trip fidelity guaranteed.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Embedded Validators</h3>
+        <p>Domain logic runs inside a sandboxed Rhai runtime. Chess rules, contract negotiation, any state machine.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Schema Enforcement</h3>
+        <p>Typed fields, transition guards, structural validation. The schema declares what's valid; the engine enforces it.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Multi-Actor Support</h3>
+        <p>Different parties sign their own mutations with their own keys. Every action is attributable and verifiable.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Zero Dependencies</h3>
+        <p>No server, no database, no blockchain, no network. Fully offline. The document is the authority.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Define Schema</h3>
+        <p>Declare fields, types, mutations, guards, and optional embedded validator code</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Create Document</h3>
+        <p>Initialize state from schema defaults, sign with authority key</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Apply Mutations</h3>
+        <p>Each mutation is validated, signed by the actor, hash-linked to the chain</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Verify Anywhere</h3>
+        <p>Any party replays the chain from genesis and confirms every step</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="examples">
+    <h2>Examples</h2>
+    <div class="example-grid">
+      <div class="example-card">
+        <h3>Chess</h3>
+        <p>Complete chess game with all rules enforced by an embedded Rhai validator (~650 lines of chess logic running inside the document's sandbox).</p>
+        <ul>
+          <li>Full move validation: legal moves, check, checkmate, stalemate</li>
+          <li>Special moves: castling, en passant, promotion</li>
+          <li>Multi-actor turns: white and black sign independently</li>
+          <li>Post-game guards: no moves after checkmate</li>
+          <li>Tamper detection on any state modification</li>
+        </ul>
+        <pre><code>cargo run --bin chess</code></pre>
+      </div>
+      <div class="example-card">
+        <h3>Contract Negotiation</h3>
+        <p>Two-party agreement where every edit, proposal, counter-offer, and acceptance is cryptographically recorded.</p>
+        <ul>
+          <li>Turn-based workflow: propose, counter, accept, withdraw</li>
+          <li>Business rules: can't accept own proposal, immutable after acceptance</li>
+          <li>Multi-party signatures: vendor and client sign independently</li>
+          <li>Complete audit trail in the hash chain</li>
+          <li>Tamper-evident final agreement</li>
+        </ul>
+        <pre><code>cargo run --bin contract</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="format">
+    <h2>Document Format</h2>
+    <p style="text-align: center;">A Tessera document is a single portable artifact &mdash; JSON or CBOR &mdash; containing everything needed to verify itself.</p>
+    <pre><code>{
+  "tessera": "0.1",
+  "schema": {
+    "fields": { "count": { "type": "u64", "default": 0 } },
+    "mutations": {
+      "increment": {
+        "guards": ["count < 1000"],
+        "effects": { "count": "count + 1" }
+      }
+    }
+  },
+  "state": { "count": 42 },
+  "chain": [ ... ],
+  "chain_mode": "embedded",
+  "pubkey": "&lt;Ed25519 public key&gt;",
+  "signature": "&lt;Ed25519 signature&gt;"
+}</code></pre>
+    <p style="text-align: center;">
+      Each mutation in the chain carries: <code>prev_hash</code>, operation,
+      <code>next_hash</code>, actor public key, and actor signature.
+      The version is the SHA-256 hash of the current state.
+    </p>
+  </section>
+
+  <footer>
+    <p>Tessera is open source, built with Rust.</p>
+    <div class="license-badges">
+      <span class="badge">MIT</span>
+      <span class="badge">Apache-2.0</span>
+    </div>
+    <p style="margin-top: 1em;">
+      <a href="https://github.com/jmcentire/tessera">GitHub</a> &middot;
+      <a href="https://github.com/jmcentire/tessera/blob/main/SPEC.md">Specification</a> &middot;
+      <a href="https://github.com/jmcentire/tessera/blob/main/README.md">Documentation</a>
+    </p>
+  </footer>
+
+</div>
+
+</body>
+</html>

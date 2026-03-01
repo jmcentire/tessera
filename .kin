@@ -1,0 +1,43 @@
+name: tessera
+audience: public
+description: >
+  Self-Validating Executable Document Format. Cryptographic integrity,
+  structural validation, thin logic layer. Cheaters can cheat but they
+  can't hide it. Data layer with integrity guarantees, not an application runtime.
+
+domains:
+  - cryptography
+  - privacy
+  - document-format
+  - hash-chain
+  - self-validating
+
+voice:
+  tone: precise, minimal, structural
+  principles:
+    - The document proves itself — no external authority consulted
+    - Integrity is detectable, not preventable
+    - The engine is a data layer, not an application server
+    - Schema declares rules, engine enforces them, application owns the logic
+  anti-patterns:
+    - Building an application runtime when a data layer suffices
+    - Preventing invalid states instead of making them detectable
+    - Coupling presentation logic to the integrity layer
+    - Over-engineering the logic layer beyond API-gateway complexity
+
+standards:
+  code_review:
+    - Every mutation in the chain must be independently verifiable
+    - Determinism is non-negotiable — same inputs, same result, every platform
+    - No floating point in the logic layer
+    - Crypto operations use audited libraries only (dalek, sha2)
+  documentation:
+    - Format spec (SPEC.md) is the source of truth
+    - Threat model included for every validation claim
+    - Test vectors shared across all future SDK implementations
+
+connects_to:
+  - signet
+  - blinddb
+  - agent-safe
+  - kindex

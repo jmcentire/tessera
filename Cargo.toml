@@ -1,0 +1,54 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/tessera-core",
+    "crates/tessera-format",
+    "crates/tessera-chain",
+    "crates/tessera-engine",
+    "crates/tessera-wasm",
+    "crates/tessera",
+    "examples/chess",
+    "examples/contract",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+rust-version = "1.75"
+repository = "https://github.com/jmcentire/tessera"
+homepage = "https://github.com/jmcentire/tessera"
+authors = ["Jeremy McEntire <jmc@kindex.tools>"]
+categories = ["cryptography", "data-structures"]
+keywords = ["tessera", "self-validating", "hash-chain", "privacy", "document"]
+
+[workspace.dependencies]
+# Internal crates
+tessera-core = { path = "crates/tessera-core" }
+tessera-format = { path = "crates/tessera-format" }
+tessera-chain = { path = "crates/tessera-chain" }
+tessera-engine = { path = "crates/tessera-engine" }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ciborium = "0.2"
+
+# Error handling
+thiserror = "2"
+
+# Crypto
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+sha2 = "0.10"
+zeroize = { version = "1.8", features = ["derive"] }
+rand = "0.8"
+rand_core = "0.6"
+
+# Encoding
+hex = "0.4"
+
+# Scripting (embedded validators)
+rhai = { version = "1", features = ["sync"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
