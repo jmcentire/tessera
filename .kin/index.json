@@ -1,0 +1,540 @@
+{
+  "domains": [
+    "code",
+    "rust"
+  ],
+  "node_count": 48,
+  "nodes": [
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-18fa31d2d08b",
+      "title": "crates/tessera-core/src/lib.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-253fbd352ce9",
+      "title": "crates/tessera-format/src/lib.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-484c5cddb26f",
+      "title": "examples/contract/src/main.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-52009ed735e4",
+      "title": "examples/contract/src/validator.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-54d68d93a070",
+      "title": "crates/tessera-chain/src/lib.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-5bbd9641122d",
+      "title": "crates/tessera-engine/src/runtime.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-78516e3a6bfe",
+      "title": "examples/chess/src/main.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-acdded1eb3fc",
+      "title": "crates/tessera-core/src/error.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-ad3aafb93ece",
+      "title": "crates/tessera-core/src/crypto.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-b2600e760431",
+      "title": "crates/tessera/src/main.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-beecced95fc3",
+      "title": "crates/tessera-core/src/types.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-ce8999702950",
+      "title": "examples/chess/src/board.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-d8eb2ae7c0aa",
+      "title": "crates/tessera-engine/src/eval.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-e013e780605d",
+      "title": "crates/tessera-engine/src/lib.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-e21a6801d637",
+      "title": "examples/chess/src/validator.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-tessera-f8d609165d8a",
+      "title": "crates/tessera-engine/src/validate.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-05f06819c95a",
+      "title": "Checkpoint",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-11b4ffc9de31",
+      "title": "GameStatus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-18cbfd62c04b",
+      "title": "Cli",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-1d804db77080",
+      "title": "TesseraError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-28438fe69788",
+      "title": "MutationDef",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-425cada93d32",
+      "title": "Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-42db8e1c3df0",
+      "title": "Signer",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-442e76e33d3c",
+      "title": "Verifier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-47e53ad78c81",
+      "title": "Schema",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-4ea23af0ad49",
+      "title": "Color",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-579935d4ca50",
+      "title": "Board",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-69cea4560b40",
+      "title": "CodeAuthorization",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-6ff59669348a",
+      "title": "Mutation",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-70a05c2b0a2f",
+      "title": "FieldDef",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-7533c5f7f255",
+      "title": "Runtime",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-77053f56a78d",
+      "title": "ApiSpec",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-7cee11e0fd82",
+      "title": "Piece",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-852b5967b82e",
+      "title": "Operation",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-892fa8f93c06",
+      "title": "Document",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-93af56357628",
+      "title": "Ed25519Signer",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-9f791ccbf8b2",
+      "title": "Value",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-a6dbe2c7d4eb",
+      "title": "Format",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-b581ea4953e9",
+      "title": "ExecutionPolicy",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-ca64a95d7c8b",
+      "title": "Move",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-ccdae99ab21d",
+      "title": "FieldType",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-cf61562cad2a",
+      "title": "FormatError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-cfab50b42089",
+      "title": "Command",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-d92fff407856",
+      "title": "PieceKind",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-dcc28e8f91e2",
+      "title": "Parser",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-f69379b286e0",
+      "title": "Ed25519Verifier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-fa7492c32712",
+      "title": "ChainMode",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-tessera-ff8696b49447",
+      "title": "CastlingRights",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:50:53",
+      "weight": 0.5
+    }
+  ],
+  "repo": "tessera",
+  "source_updated_at": "2026-05-30T14:50:53",
+  "version": 1
+}

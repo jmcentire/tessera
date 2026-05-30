@@ -1,1177 +1,319 @@
 {
-  "version": "1.0.0",
-  "project": {
-    "name": "tessera",
-    "description": "Code map exported from Kindex for tessera.",
-    "languages": [
-      "Rust",
-      "rust"
-    ],
-    "frameworks": [],
-    "analyzedAt": "2026-05-24T15:08:59",
-    "gitCommitHash": "bcb77866bd503502f7971360f25a6b4dff7d3f0e"
-  },
-  "nodes": [
-    {
-      "id": "code-sym-tessera-6ff59669348a",
-      "type": "class",
-      "name": "Mutation",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Mutation (crates/tessera-core/src/types.rs:172)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-28438fe69788",
-      "type": "class",
-      "name": "MutationDef",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class MutationDef (crates/tessera-core/src/types.rs:149)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-dcc28e8f91e2",
-      "type": "class",
-      "name": "Parser",
-      "filePath": "crates/tessera-engine/src/eval.rs",
-      "summary": "class Parser (crates/tessera-engine/src/eval.rs:219)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-tessera-e21a6801d637",
-      "type": "file",
-      "name": "examples/chess/src/validator.rs",
-      "filePath": "examples/chess/src/validator.rs",
-      "summary": "Language: Rust | Path: examples/chess/src/validator.rs | ~9 lines",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-52009ed735e4",
-      "type": "file",
-      "name": "examples/contract/src/validator.rs",
-      "filePath": "examples/contract/src/validator.rs",
-      "summary": "Language: Rust | Path: examples/contract/src/validator.rs | ~11 lines",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-sym-tessera-425cada93d32",
-      "type": "class",
-      "name": "Token",
-      "filePath": "crates/tessera-engine/src/eval.rs",
-      "summary": "class Token (crates/tessera-engine/src/eval.rs:25)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-442e76e33d3c",
-      "type": "class",
-      "name": "Verifier",
-      "filePath": "crates/tessera-core/src/crypto.rs",
-      "summary": "class Verifier (crates/tessera-core/src/crypto.rs:15)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-cfab50b42089",
-      "type": "class",
-      "name": "Command",
-      "filePath": "crates/tessera/src/main.rs",
-      "summary": "class Command (crates/tessera/src/main.rs:21)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-tessera-ce8999702950",
-      "type": "file",
-      "name": "examples/chess/src/board.rs",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "Language: Rust | Path: examples/chess/src/board.rs | ~1106 lines ## Classes - Board",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 11,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-d8eb2ae7c0aa",
-      "type": "file",
-      "name": "crates/tessera-engine/src/eval.rs",
-      "filePath": "crates/tessera-engine/src/eval.rs",
-      "summary": "Language: Rust | Path: crates/tessera-engine/src/eval.rs | ~725 lines ## Classes - Parser",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-beecced95fc3",
-      "type": "file",
-      "name": "crates/tessera-core/src/types.rs",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "Language: Rust | Path: crates/tessera-core/src/types.rs | ~328 lines ## Classes - ApiSpec",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 11,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-b2600e760431",
-      "type": "file",
-      "name": "crates/tessera/src/main.rs",
-      "filePath": "crates/tessera/src/main.rs",
-      "summary": "Language: Rust | Path: crates/tessera/src/main.rs | ~454 lines ## Classes - Cli",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 18,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-253fbd352ce9",
-      "type": "file",
-      "name": "crates/tessera-format/src/lib.rs",
-      "filePath": "crates/tessera-format/src/lib.rs",
-      "summary": "Language: Rust | Path: crates/tessera-format/src/lib.rs | ~211 lines ## Classes - Format",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 9,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-acdded1eb3fc",
-      "type": "file",
-      "name": "crates/tessera-core/src/error.rs",
-      "filePath": "crates/tessera-core/src/error.rs",
-      "summary": "Language: Rust | Path: crates/tessera-core/src/error.rs | ~42 lines ## Classes - TesseraError",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-5bbd9641122d",
-      "type": "file",
-      "name": "crates/tessera-engine/src/runtime.rs",
-      "filePath": "crates/tessera-engine/src/runtime.rs",
-      "summary": "Language: Rust | Path: crates/tessera-engine/src/runtime.rs | ~644 lines ## Classes - CodeAuthorization",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 7,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-ad3aafb93ece",
-      "type": "file",
-      "name": "crates/tessera-core/src/crypto.rs",
-      "filePath": "crates/tessera-core/src/crypto.rs",
-      "summary": "Language: Rust | Path: crates/tessera-core/src/crypto.rs | ~207 lines ## Classes - Ed25519Signer",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 7,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-484c5cddb26f",
-      "type": "file",
-      "name": "examples/contract/src/main.rs",
-      "filePath": "examples/contract/src/main.rs",
-      "summary": "Language: Rust | Path: examples/contract/src/main.rs | ~674 lines ## Functions - accept( doc: &mut Document, party: &str, actor: &Ed25519Signer, authority: &Ed25519Signer, rt: &Runtime, ) -> Result<(), String>",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 14,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-78516e3a6bfe",
-      "type": "file",
-      "name": "examples/chess/src/main.rs",
-      "filePath": "examples/chess/src/main.rs",
-      "summary": "Language: Rust | Path: examples/chess/src/main.rs | ~518 lines ## Functions - apply_chess_move( doc: &mut Document, move_str: &str, player: &Ed25519Signer, authority: &Ed25519Signer, rt: &Runtime, ) -> Result<(), String>",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 6,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-54d68d93a070",
-      "type": "file",
-      "name": "crates/tessera-chain/src/lib.rs",
-      "filePath": "crates/tessera-chain/src/lib.rs",
-      "summary": "Language: Rust | Path: crates/tessera-chain/src/lib.rs | ~592 lines ## Functions - apply_mutation( doc: &mut Document, op: Operation, actor: &Ed25519Signer, ) -> Result<(), TesseraError>",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 11,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-f8d609165d8a",
-      "type": "file",
-      "name": "crates/tessera-engine/src/validate.rs",
-      "filePath": "crates/tessera-engine/src/validate.rs",
-      "summary": "Language: Rust | Path: crates/tessera-engine/src/validate.rs | ~237 lines ## Functions - normalize_state_to_schema(state: &mut State, schema: &Schema)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 4,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-e013e780605d",
-      "type": "file",
-      "name": "crates/tessera-engine/src/lib.rs",
-      "filePath": "crates/tessera-engine/src/lib.rs",
-      "summary": "Language: Rust | Path: crates/tessera-engine/src/lib.rs | ~680 lines ## Functions - create_document( schema: Schema, api: ApiSpec, chain_mode: ChainMode, signer: &Ed25519Signer, ) -> Result<Document, TesseraError>",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 9,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-tessera-18fa31d2d08b",
-      "type": "file",
-      "name": "crates/tessera-core/src/lib.rs",
-      "filePath": "crates/tessera-core/src/lib.rs",
-      "summary": "Language: Rust | Path: crates/tessera-core/src/lib.rs | ~3 lines",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-sym-tessera-579935d4ca50",
-      "type": "class",
-      "name": "Board",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class Board (examples/chess/src/board.rs:316)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-ff8696b49447",
-      "type": "class",
-      "name": "CastlingRights",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class CastlingRights (examples/chess/src/board.rs:256)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-4ea23af0ad49",
-      "type": "class",
-      "name": "Color",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class Color (examples/chess/src/board.rs:9)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-11b4ffc9de31",
-      "type": "class",
-      "name": "GameStatus",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class GameStatus (examples/chess/src/board.rs:295)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-ca64a95d7c8b",
-      "type": "class",
-      "name": "Move",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class Move (examples/chess/src/board.rs:115)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-7cee11e0fd82",
-      "type": "class",
-      "name": "Piece",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class Piece (examples/chess/src/board.rs:56)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-d92fff407856",
-      "type": "class",
-      "name": "PieceKind",
-      "filePath": "examples/chess/src/board.rs",
-      "summary": "class PieceKind (examples/chess/src/board.rs:46)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-77053f56a78d",
-      "type": "class",
-      "name": "ApiSpec",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class ApiSpec (crates/tessera-core/src/types.rs:206)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-fa7492c32712",
-      "type": "class",
-      "name": "ChainMode",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class ChainMode (crates/tessera-core/src/types.rs:36)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-05f06819c95a",
-      "type": "class",
-      "name": "Checkpoint",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Checkpoint (crates/tessera-core/src/types.rs:218)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-892fa8f93c06",
-      "type": "class",
-      "name": "Document",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Document (crates/tessera-core/src/types.rs:6)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-70a05c2b0a2f",
-      "type": "class",
-      "name": "FieldDef",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class FieldDef (crates/tessera-core/src/types.rs:63)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-ccdae99ab21d",
-      "type": "class",
-      "name": "FieldType",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class FieldType (crates/tessera-core/src/types.rs:76)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-852b5967b82e",
-      "type": "class",
-      "name": "Operation",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Operation (crates/tessera-core/src/types.rs:194)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-47e53ad78c81",
-      "type": "class",
-      "name": "Schema",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Schema (crates/tessera-core/src/types.rs:47)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-9f791ccbf8b2",
-      "type": "class",
-      "name": "Value",
-      "filePath": "crates/tessera-core/src/types.rs",
-      "summary": "class Value (crates/tessera-core/src/types.rs:90)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-a6dbe2c7d4eb",
-      "type": "class",
-      "name": "Format",
-      "filePath": "crates/tessera-format/src/lib.rs",
-      "summary": "class Format (crates/tessera-format/src/lib.rs:27)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-cf61562cad2a",
-      "type": "class",
-      "name": "FormatError",
-      "filePath": "crates/tessera-format/src/lib.rs",
-      "summary": "class FormatError (crates/tessera-format/src/lib.rs:5)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-1d804db77080",
-      "type": "class",
-      "name": "TesseraError",
-      "filePath": "crates/tessera-core/src/error.rs",
-      "summary": "class TesseraError (crates/tessera-core/src/error.rs:4)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-69cea4560b40",
-      "type": "class",
-      "name": "CodeAuthorization",
-      "filePath": "crates/tessera-engine/src/runtime.rs",
-      "summary": "class CodeAuthorization (crates/tessera-engine/src/runtime.rs:48)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-b581ea4953e9",
-      "type": "class",
-      "name": "ExecutionPolicy",
-      "filePath": "crates/tessera-engine/src/runtime.rs",
-      "summary": "class ExecutionPolicy (crates/tessera-engine/src/runtime.rs:26)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-7533c5f7f255",
-      "type": "class",
-      "name": "Runtime",
-      "filePath": "crates/tessera-engine/src/runtime.rs",
-      "summary": "class Runtime (crates/tessera-engine/src/runtime.rs:81)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-93af56357628",
-      "type": "class",
-      "name": "Ed25519Signer",
-      "filePath": "crates/tessera-core/src/crypto.rs",
-      "summary": "class Ed25519Signer (crates/tessera-core/src/crypto.rs:21)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-f69379b286e0",
-      "type": "class",
-      "name": "Ed25519Verifier",
-      "filePath": "crates/tessera-core/src/crypto.rs",
-      "summary": "class Ed25519Verifier (crates/tessera-core/src/crypto.rs:90)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-42db8e1c3df0",
-      "type": "class",
-      "name": "Signer",
-      "filePath": "crates/tessera-core/src/crypto.rs",
-      "summary": "class Signer (crates/tessera-core/src/crypto.rs:6)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-tessera-18cbfd62c04b",
-      "type": "concept",
-      "name": "Cli",
-      "filePath": "/Users/jmcentire/Code/tessera/crates/tessera/src/main.rs:15",
-      "summary": "class Cli (crates/tessera/src/main.rs:15)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    }
-  ],
   "edges": [
     {
-      "source": "code-sym-tessera-6ff59669348a",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-6ff59669348a",
-      "target": "code-sym-tessera-28438fe69788",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-28438fe69788",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-28438fe69788",
-      "target": "code-sym-tessera-6ff59669348a",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-dcc28e8f91e2",
-      "target": "code-mod-tessera-d8eb2ae7c0aa",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-tessera-e21a6801d637",
-      "target": "code-mod-tessera-52009ed735e4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-tessera-52009ed735e4",
-      "target": "code-mod-tessera-e21a6801d637",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-425cada93d32",
-      "target": "code-mod-tessera-d8eb2ae7c0aa",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-442e76e33d3c",
-      "target": "code-mod-tessera-ad3aafb93ece",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-cfab50b42089",
-      "target": "code-mod-tessera-b2600e760431",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-tessera-ad3aafb93ece",
+      "source": "code-mod-tessera-18fa31d2d08b",
       "target": "code-mod-tessera-acdded1eb3fc",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
+      "source": "code-mod-tessera-18fa31d2d08b",
+      "target": "code-mod-tessera-ad3aafb93ece",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-tessera-18fa31d2d08b",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
       "source": "code-mod-tessera-484c5cddb26f",
       "target": "code-mod-tessera-e21a6801d637",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
       "source": "code-mod-tessera-78516e3a6bfe",
       "target": "code-mod-tessera-ce8999702950",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
       "source": "code-mod-tessera-78516e3a6bfe",
       "target": "code-mod-tessera-e21a6801d637",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
+      "source": "code-mod-tessera-ad3aafb93ece",
+      "target": "code-mod-tessera-acdded1eb3fc",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-tessera-e013e780605d",
+      "target": "code-mod-tessera-5bbd9641122d",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
       "source": "code-mod-tessera-e013e780605d",
       "target": "code-mod-tessera-d8eb2ae7c0aa",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
       "source": "code-mod-tessera-e013e780605d",
       "target": "code-mod-tessera-f8d609165d8a",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-mod-tessera-e013e780605d",
-      "target": "code-mod-tessera-5bbd9641122d",
-      "type": "depends_on",
       "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-tessera-18fa31d2d08b",
-      "target": "code-mod-tessera-ad3aafb93ece",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-tessera-18fa31d2d08b",
-      "target": "code-mod-tessera-acdded1eb3fc",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-tessera-18fa31d2d08b",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-sym-tessera-579935d4ca50",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-ff8696b49447",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-4ea23af0ad49",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-11b4ffc9de31",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-ca64a95d7c8b",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-7cee11e0fd82",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-d92fff407856",
-      "target": "code-mod-tessera-ce8999702950",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-77053f56a78d",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-fa7492c32712",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
       "source": "code-sym-tessera-05f06819c95a",
       "target": "code-mod-tessera-beecced95fc3",
       "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
+      "weight": 0.6
     },
     {
-      "source": "code-sym-tessera-892fa8f93c06",
-      "target": "code-mod-tessera-beecced95fc3",
+      "direction": "outbound",
+      "source": "code-sym-tessera-11b4ffc9de31",
+      "target": "code-mod-tessera-ce8999702950",
       "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
+      "weight": 0.6
     },
     {
-      "source": "code-sym-tessera-70a05c2b0a2f",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-ccdae99ab21d",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-852b5967b82e",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-47e53ad78c81",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-9f791ccbf8b2",
-      "target": "code-mod-tessera-beecced95fc3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-a6dbe2c7d4eb",
-      "target": "code-mod-tessera-253fbd352ce9",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-cf61562cad2a",
-      "target": "code-mod-tessera-253fbd352ce9",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-1d804db77080",
-      "target": "code-mod-tessera-acdded1eb3fc",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-69cea4560b40",
-      "target": "code-mod-tessera-5bbd9641122d",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-b581ea4953e9",
-      "target": "code-mod-tessera-5bbd9641122d",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-7533c5f7f255",
-      "target": "code-mod-tessera-5bbd9641122d",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-93af56357628",
-      "target": "code-sym-tessera-42db8e1c3df0",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.7
-    },
-    {
-      "source": "code-sym-tessera-93af56357628",
-      "target": "code-mod-tessera-ad3aafb93ece",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-f69379b286e0",
-      "target": "code-sym-tessera-442e76e33d3c",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.7
-    },
-    {
-      "source": "code-sym-tessera-f69379b286e0",
-      "target": "code-mod-tessera-ad3aafb93ece",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-tessera-42db8e1c3df0",
-      "target": "code-mod-tessera-ad3aafb93ece",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
       "source": "code-sym-tessera-18cbfd62c04b",
       "target": "code-mod-tessera-b2600e760431",
       "type": "contains",
+      "weight": 0.6
+    },
+    {
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-sym-tessera-1d804db77080",
+      "target": "code-mod-tessera-acdded1eb3fc",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-28438fe69788",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-425cada93d32",
+      "target": "code-mod-tessera-d8eb2ae7c0aa",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-42db8e1c3df0",
+      "target": "code-mod-tessera-ad3aafb93ece",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-442e76e33d3c",
+      "target": "code-mod-tessera-ad3aafb93ece",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-47e53ad78c81",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-4ea23af0ad49",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-579935d4ca50",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-69cea4560b40",
+      "target": "code-mod-tessera-5bbd9641122d",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-6ff59669348a",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-70a05c2b0a2f",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-7533c5f7f255",
+      "target": "code-mod-tessera-5bbd9641122d",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-77053f56a78d",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-7cee11e0fd82",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-852b5967b82e",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-892fa8f93c06",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-93af56357628",
+      "target": "code-mod-tessera-ad3aafb93ece",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-93af56357628",
+      "target": "code-sym-tessera-42db8e1c3df0",
+      "type": "depends_on",
+      "weight": 0.7
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-9f791ccbf8b2",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-a6dbe2c7d4eb",
+      "target": "code-mod-tessera-253fbd352ce9",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-b581ea4953e9",
+      "target": "code-mod-tessera-5bbd9641122d",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-ca64a95d7c8b",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-ccdae99ab21d",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-cf61562cad2a",
+      "target": "code-mod-tessera-253fbd352ce9",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-cfab50b42089",
+      "target": "code-mod-tessera-b2600e760431",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-d92fff407856",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-dcc28e8f91e2",
+      "target": "code-mod-tessera-d8eb2ae7c0aa",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-f69379b286e0",
+      "target": "code-mod-tessera-ad3aafb93ece",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-f69379b286e0",
+      "target": "code-sym-tessera-442e76e33d3c",
+      "type": "depends_on",
+      "weight": 0.7
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-fa7492c32712",
+      "target": "code-mod-tessera-beecced95fc3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-tessera-ff8696b49447",
+      "target": "code-mod-tessera-ce8999702950",
+      "type": "contains",
+      "weight": 0.6
     }
   ],
   "layers": [
     {
+      "description": "Kindex-inferred core layer.",
       "id": "core",
       "name": "Core",
-      "description": "Kindex-inferred core layer.",
       "nodeIds": [
         "code-mod-tessera-18fa31d2d08b",
         "code-mod-tessera-253fbd352ce9",
@@ -1188,17 +330,17 @@
         "code-mod-tessera-d8eb2ae7c0aa",
         "code-mod-tessera-e013e780605d",
         "code-mod-tessera-e21a6801d637",
-        "code-mod-tessera-f8d609165d8a",
-        "code-sym-tessera-18cbfd62c04b"
+        "code-mod-tessera-f8d609165d8a"
       ]
     },
     {
+      "description": "Kindex-inferred domain layer.",
       "id": "domain",
       "name": "Domain",
-      "description": "Kindex-inferred domain layer.",
       "nodeIds": [
         "code-sym-tessera-05f06819c95a",
         "code-sym-tessera-11b4ffc9de31",
+        "code-sym-tessera-18cbfd62c04b",
         "code-sym-tessera-1d804db77080",
         "code-sym-tessera-28438fe69788",
         "code-sym-tessera-425cada93d32",
@@ -1231,11 +373,837 @@
       ]
     }
   ],
+  "nodes": [
+    {
+      "complexity": 11,
+      "filePath": "crates/tessera-chain/src/lib.rs",
+      "id": "code-mod-tessera-54d68d93a070",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-chain/src/lib.rs",
+      "summary": "Language: Rust | Path: crates/tessera-chain/src/lib.rs | ~592 lines ## Functions - apply_mutation( doc: &mut Document, op: Operation, actor: &Ed25519Signer, ) -> Result<(), TesseraError>",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/crypto.rs",
+      "id": "code-sym-tessera-42db8e1c3df0",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Signer",
+      "summary": "class Signer (crates/tessera-core/src/crypto.rs:6)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/crypto.rs",
+      "id": "code-sym-tessera-442e76e33d3c",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Verifier",
+      "summary": "class Verifier (crates/tessera-core/src/crypto.rs:15)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/crypto.rs",
+      "id": "code-sym-tessera-93af56357628",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Ed25519Signer",
+      "summary": "class Ed25519Signer (crates/tessera-core/src/crypto.rs:21)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/crypto.rs",
+      "id": "code-sym-tessera-f69379b286e0",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Ed25519Verifier",
+      "summary": "class Ed25519Verifier (crates/tessera-core/src/crypto.rs:90)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 7,
+      "filePath": "crates/tessera-core/src/crypto.rs",
+      "id": "code-mod-tessera-ad3aafb93ece",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-core/src/crypto.rs",
+      "summary": "Language: Rust | Path: crates/tessera-core/src/crypto.rs | ~207 lines ## Classes - Ed25519Signer",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/error.rs",
+      "id": "code-sym-tessera-1d804db77080",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "TesseraError",
+      "summary": "class TesseraError (crates/tessera-core/src/error.rs:4)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/error.rs",
+      "id": "code-mod-tessera-acdded1eb3fc",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-core/src/error.rs",
+      "summary": "Language: Rust | Path: crates/tessera-core/src/error.rs | ~42 lines ## Classes - TesseraError",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/lib.rs",
+      "id": "code-mod-tessera-18fa31d2d08b",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-core/src/lib.rs",
+      "summary": "Language: Rust | Path: crates/tessera-core/src/lib.rs | ~3 lines",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-05f06819c95a",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Checkpoint",
+      "summary": "class Checkpoint (crates/tessera-core/src/types.rs:218)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-28438fe69788",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "MutationDef",
+      "summary": "class MutationDef (crates/tessera-core/src/types.rs:149)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-47e53ad78c81",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Schema",
+      "summary": "class Schema (crates/tessera-core/src/types.rs:47)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-6ff59669348a",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Mutation",
+      "summary": "class Mutation (crates/tessera-core/src/types.rs:172)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-70a05c2b0a2f",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "FieldDef",
+      "summary": "class FieldDef (crates/tessera-core/src/types.rs:63)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-77053f56a78d",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "ApiSpec",
+      "summary": "class ApiSpec (crates/tessera-core/src/types.rs:206)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-852b5967b82e",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Operation",
+      "summary": "class Operation (crates/tessera-core/src/types.rs:194)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-892fa8f93c06",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Document",
+      "summary": "class Document (crates/tessera-core/src/types.rs:6)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-9f791ccbf8b2",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Value",
+      "summary": "class Value (crates/tessera-core/src/types.rs:90)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-ccdae99ab21d",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "FieldType",
+      "summary": "class FieldType (crates/tessera-core/src/types.rs:76)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-sym-tessera-fa7492c32712",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "ChainMode",
+      "summary": "class ChainMode (crates/tessera-core/src/types.rs:36)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 11,
+      "filePath": "crates/tessera-core/src/types.rs",
+      "id": "code-mod-tessera-beecced95fc3",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-core/src/types.rs",
+      "summary": "Language: Rust | Path: crates/tessera-core/src/types.rs | ~328 lines ## Classes - ApiSpec",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-engine/src/eval.rs",
+      "id": "code-sym-tessera-425cada93d32",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Token",
+      "summary": "class Token (crates/tessera-engine/src/eval.rs:25)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-engine/src/eval.rs",
+      "id": "code-sym-tessera-dcc28e8f91e2",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Parser",
+      "summary": "class Parser (crates/tessera-engine/src/eval.rs:219)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 8,
+      "filePath": "crates/tessera-engine/src/eval.rs",
+      "id": "code-mod-tessera-d8eb2ae7c0aa",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-engine/src/eval.rs",
+      "summary": "Language: Rust | Path: crates/tessera-engine/src/eval.rs | ~725 lines ## Classes - Parser",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 9,
+      "filePath": "crates/tessera-engine/src/lib.rs",
+      "id": "code-mod-tessera-e013e780605d",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-engine/src/lib.rs",
+      "summary": "Language: Rust | Path: crates/tessera-engine/src/lib.rs | ~680 lines ## Functions - create_document( schema: Schema, api: ApiSpec, chain_mode: ChainMode, signer: &Ed25519Signer, ) -> Result<Document, TesseraError>",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-engine/src/runtime.rs",
+      "id": "code-sym-tessera-69cea4560b40",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "CodeAuthorization",
+      "summary": "class CodeAuthorization (crates/tessera-engine/src/runtime.rs:48)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-engine/src/runtime.rs",
+      "id": "code-sym-tessera-7533c5f7f255",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Runtime",
+      "summary": "class Runtime (crates/tessera-engine/src/runtime.rs:81)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-engine/src/runtime.rs",
+      "id": "code-sym-tessera-b581ea4953e9",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "ExecutionPolicy",
+      "summary": "class ExecutionPolicy (crates/tessera-engine/src/runtime.rs:26)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 7,
+      "filePath": "crates/tessera-engine/src/runtime.rs",
+      "id": "code-mod-tessera-5bbd9641122d",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-engine/src/runtime.rs",
+      "summary": "Language: Rust | Path: crates/tessera-engine/src/runtime.rs | ~644 lines ## Classes - CodeAuthorization",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 4,
+      "filePath": "crates/tessera-engine/src/validate.rs",
+      "id": "code-mod-tessera-f8d609165d8a",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-engine/src/validate.rs",
+      "summary": "Language: Rust | Path: crates/tessera-engine/src/validate.rs | ~237 lines ## Functions - normalize_state_to_schema(state: &mut State, schema: &Schema)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-format/src/lib.rs",
+      "id": "code-sym-tessera-a6dbe2c7d4eb",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Format",
+      "summary": "class Format (crates/tessera-format/src/lib.rs:27)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera-format/src/lib.rs",
+      "id": "code-sym-tessera-cf61562cad2a",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "FormatError",
+      "summary": "class FormatError (crates/tessera-format/src/lib.rs:5)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 9,
+      "filePath": "crates/tessera-format/src/lib.rs",
+      "id": "code-mod-tessera-253fbd352ce9",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera-format/src/lib.rs",
+      "summary": "Language: Rust | Path: crates/tessera-format/src/lib.rs | ~211 lines ## Classes - Format",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera/src/main.rs",
+      "id": "code-sym-tessera-18cbfd62c04b",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Cli",
+      "summary": "class Cli (crates/tessera/src/main.rs:15)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "crates/tessera/src/main.rs",
+      "id": "code-sym-tessera-cfab50b42089",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Command",
+      "summary": "class Command (crates/tessera/src/main.rs:21)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 18,
+      "filePath": "crates/tessera/src/main.rs",
+      "id": "code-mod-tessera-b2600e760431",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "crates/tessera/src/main.rs",
+      "summary": "Language: Rust | Path: crates/tessera/src/main.rs | ~454 lines ## Classes - Cli",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-11b4ffc9de31",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "GameStatus",
+      "summary": "class GameStatus (examples/chess/src/board.rs:295)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-4ea23af0ad49",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Color",
+      "summary": "class Color (examples/chess/src/board.rs:9)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-579935d4ca50",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Board",
+      "summary": "class Board (examples/chess/src/board.rs:316)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-7cee11e0fd82",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Piece",
+      "summary": "class Piece (examples/chess/src/board.rs:56)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-ca64a95d7c8b",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Move",
+      "summary": "class Move (examples/chess/src/board.rs:115)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-d92fff407856",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "PieceKind",
+      "summary": "class PieceKind (examples/chess/src/board.rs:46)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-sym-tessera-ff8696b49447",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "CastlingRights",
+      "summary": "class CastlingRights (examples/chess/src/board.rs:256)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 11,
+      "filePath": "examples/chess/src/board.rs",
+      "id": "code-mod-tessera-ce8999702950",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "examples/chess/src/board.rs",
+      "summary": "Language: Rust | Path: examples/chess/src/board.rs | ~1106 lines ## Classes - Board",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 6,
+      "filePath": "examples/chess/src/main.rs",
+      "id": "code-mod-tessera-78516e3a6bfe",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "examples/chess/src/main.rs",
+      "summary": "Language: Rust | Path: examples/chess/src/main.rs | ~518 lines ## Functions - apply_chess_move( doc: &mut Document, move_str: &str, player: &Ed25519Signer, authority: &Ed25519Signer, rt: &Runtime, ) -> Result<(), String>",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/chess/src/validator.rs",
+      "id": "code-mod-tessera-e21a6801d637",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "examples/chess/src/validator.rs",
+      "summary": "Language: Rust | Path: examples/chess/src/validator.rs | ~9 lines",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 14,
+      "filePath": "examples/contract/src/main.rs",
+      "id": "code-mod-tessera-484c5cddb26f",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "examples/contract/src/main.rs",
+      "summary": "Language: Rust | Path: examples/contract/src/main.rs | ~674 lines ## Functions - accept( doc: &mut Document, party: &str, actor: &Ed25519Signer, authority: &Ed25519Signer, rt: &Runtime, ) -> Result<(), String>",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/contract/src/validator.rs",
+      "id": "code-mod-tessera-52009ed735e4",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "examples/contract/src/validator.rs",
+      "summary": "Language: Rust | Path: examples/contract/src/validator.rs | ~11 lines",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    }
+  ],
+  "project": {
+    "analyzedAt": "2026-05-24T17:35:33-05:00",
+    "description": "Code map exported from Kindex for tessera.",
+    "frameworks": [],
+    "gitCommitHash": "ad3f5233667b6b8427fed024dfc840183c7ee582",
+    "languages": [
+      "Rust"
+    ],
+    "name": "tessera"
+  },
   "tour": [
     {
-      "order": 1,
-      "title": "Core",
-      "description": "Review 17 node(s) in the Core layer.",
+      "description": "Review 16 node(s) in the Core layer.",
       "nodeIds": [
         "code-mod-tessera-18fa31d2d08b",
         "code-mod-tessera-253fbd352ce9",
@@ -1252,17 +1220,17 @@
         "code-mod-tessera-d8eb2ae7c0aa",
         "code-mod-tessera-e013e780605d",
         "code-mod-tessera-e21a6801d637",
-        "code-mod-tessera-f8d609165d8a",
-        "code-sym-tessera-18cbfd62c04b"
-      ]
+        "code-mod-tessera-f8d609165d8a"
+      ],
+      "order": 1,
+      "title": "Core"
     },
     {
-      "order": 2,
-      "title": "Domain",
-      "description": "Review 31 node(s) in the Domain layer.",
+      "description": "Review 32 node(s) in the Domain layer.",
       "nodeIds": [
         "code-sym-tessera-05f06819c95a",
         "code-sym-tessera-11b4ffc9de31",
+        "code-sym-tessera-18cbfd62c04b",
         "code-sym-tessera-1d804db77080",
         "code-sym-tessera-28438fe69788",
         "code-sym-tessera-425cada93d32",
@@ -1284,9 +1252,11 @@
         "code-sym-tessera-a6dbe2c7d4eb",
         "code-sym-tessera-b581ea4953e9",
         "code-sym-tessera-ca64a95d7c8b",
-        "code-sym-tessera-ccdae99ab21d",
-        "code-sym-tessera-cf61562cad2a"
-      ]
+        "code-sym-tessera-ccdae99ab21d"
+      ],
+      "order": 2,
+      "title": "Domain"
     }
-  ]
+  ],
+  "version": "1.0.0"
 }
