@@ -130,7 +130,7 @@ impl Runtime {
                     let code_hash = sha256_hex(code.as_bytes());
                     Err(TesseraError::CodeNotAuthorized(format!(
                         "authority {} not in trust list (code hash: {})",
-                        &doc.pubkey, code_hash
+                        doc.pubkey, code_hash
                     )))
                 }
             }
@@ -147,7 +147,7 @@ impl Runtime {
 
                 Err(TesseraError::CodeNotAuthorized(format!(
                     "no valid authorization for code hash {} from authority {}",
-                    code_hash, &doc.pubkey
+                    code_hash, doc.pubkey
                 )))
             }
         }
